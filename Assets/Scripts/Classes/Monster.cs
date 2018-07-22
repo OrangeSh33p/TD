@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Monstre : MonoBehaviour 
+public class Monster : MonoBehaviour 
 {
-	public float speed;
-	public float maxHp;
-	public float hp;
-
 	public Slider hpBar;
+
+	[SerializeField] float speed;
+	[SerializeField] float maxHp;
+	[SerializeField] float hp;
 
 	void Start ()
 	{
@@ -25,6 +25,6 @@ public class Monstre : MonoBehaviour
 	{
 		hp -= damage;
 		hpBar.value = hp / maxHp;
-		if (hp == 0) Destroy (transform.parent.gameObject);
+		if (hp <= 0) Destroy (gameObject);
 	}
 }
