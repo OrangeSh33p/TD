@@ -2,29 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class Monster : MonoBehaviour 
 {
+
+	//Change HP Bar system
+	[Header("Boring Variables")]
 	public Slider hpBar;
 
-	[SerializeField] float speed;
-	[SerializeField] float maxHp;
-	[SerializeField] float hp;
+	//State
+	float hp;
+	Vector3 origin;
+	Vector3 destination;
+
+	//References
+	GoldManager goldManager = GoldManager.Instance;
+	LivesManager livesManager = LivesManager.Instance;
+	MonsterManager monsterManager = MonsterManager.Instance;
+	NavMeshAgent navMeshAgent;
 
 	void Start ()
 	{
-		hp = maxHp;
+		transform.parent = monsterManager.transform;
+		hp = monsterManager.maxHp;
+
+		origin = Spawner.Instance.transform.position;
+		destination = Base.Instance.transform.position;
+
+		navMeshAgent = GetComponent<NavMeshAgent> ();
+		navMeshAgent.destination = destination;
+		navMeshAgent.speed = monsterManager.speed;
 	}
 
 	void Update ()
 	{
-		transform.position += transform.forward*speed*Time.deltaTime;
+		if (Vector3.Distance (transform.position, destination) < 1)
+			Respawn ();
 	}
 
-	public void Damaged (float damage)
+	void Respawn ()
+	{
+		livesManager.LoseLife ();
+		transform.position = origin;
+	}
+
+	public void Damage (float damage)
 	{
 		hp -= damage;
-		hpBar.value = hp / maxHp;
-		if (hp <= 0) Destroy (gameObject);
+		hpBar.value = hp / monsterManager.maxHp;
+		if (hp <= 0)
+			Death ();
+	}
+
+	void Death ()
+	{
+		goldManager.AddGold (monsterManager.reward);
+		if (Spawner.Instance.wavesAreOver && monsterManager.MonsterList().Count == 1)
+			StartCoroutine (GameManager.Instance.Victory());
+		Destroy (gameObject);
 	}
 }

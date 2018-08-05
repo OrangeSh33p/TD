@@ -4,27 +4,31 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour 
 {
-	[HideInInspector] public Transform target;
-	[HideInInspector] public float speed;
-	[HideInInspector] public float damage;
+	//State
+	Transform targetTransform;
+
+	//References
+	TowerManager towerManager = TowerManager.Instance;
 
 	void Update () 
 	{
-		//Script keeps executing after gameobject has been destoyed ???
-		if (target == null)
-		{
+		if (targetTransform == null)
 			Destroy (gameObject);
-		}
 		else
 		{
-			transform.LookAt (target);
-			transform.position += transform.forward*speed*Time.deltaTime;
+			transform.LookAt (targetTransform);
+			transform.position += transform.forward*towerManager.bulletSpeed*Time.deltaTime;
 
-			if (Vector3.Distance(transform.position, target.position) < 1)
+			if (Vector3.Distance(transform.position, targetTransform.position) < 1)
 			{
-				target.GetComponent<Monster> ().Damaged (damage);
+				targetTransform.GetComponent<Monster> ().Damage (towerManager.damage);
 				Destroy (gameObject);		
 			}			
 		}
+	}
+
+	public void Initialize (Transform target)
+	{
+		targetTransform = target;
 	}
 }
