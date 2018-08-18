@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1405905086358462}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.678871, y: 0.76013273, z: -2.2050033}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,6 +58,7 @@ MonoBehaviour:
   bulletSpeed: 50
   bulletPrefab: {fileID: 1081709547453276, guid: 7c4cbc240913cd74590c50e312a8d538,
     type: 2}
+  bulletSpawnPoint: {x: 0, y: 12, z: 0}
   buildTowerButton: {fileID: 0}
   cancelBuildButton: {fileID: 0}
   towerPrefab: {fileID: 1227333984325806, guid: 8f9b39a74c491d34889bc3652ba4e175,

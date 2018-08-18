@@ -9,6 +9,13 @@ public class GameManager : MonoSingleton<GameManager>
 	[SerializeField] GameObject gameoverOverlay;
 	[SerializeField] GameObject victoryOverlay;
 
+	[HideInInspector] public float timeScale;
+
+	void Start ()
+	{
+		timeScale = 1;
+	}
+
 	//Why is all dark when restart ?
 	//Called by LivesManager when one life is lost
 	public IEnumerator GameOver ()

@@ -39,7 +39,7 @@ public class GoldManager : MonoSingleton<GoldManager>
 
 	void PrintGold ()
 	{
-		goldText.text = "Gold : " + gold;
+		goldText.text = "x " + gold;
 	}
 
 	public IEnumerator DisplayInsufficientGoldText ()

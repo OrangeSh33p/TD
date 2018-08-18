@@ -9,6 +9,8 @@ public class GridManager : MonoSingleton<GridManager>
 	//GRID coordinates are specific to this script. They consist of 2 int : East and North. East correspond to x and North to z
 
 	[Header("Balancing")]
+	[SerializeField] List<Vector2Int> path;
+
 	[Header("Absolute X")]
 	[SerializeField] float minX;
 	[SerializeField] float maxX;
@@ -25,6 +27,9 @@ public class GridManager : MonoSingleton<GridManager>
 	[Header("Boring Variables")]
 	[SerializeField] GameObject CantBuildOnPathText;
 	[SerializeField] GameObject CantBuildOnTowerText;
+	[SerializeField] GameObject TileFree;
+	[SerializeField] GameObject TilePath;
+	[SerializeField] bool createGrid;
 
 	//Intermediate variables
 	float absWidth;
@@ -34,9 +39,12 @@ public class GridManager : MonoSingleton<GridManager>
 	float HRatio;
 	float VRatio;
 
-	public enum Tile{path, free, tower};
+	//Declarations
+	public enum Tile{free, tower, path};
 
-	public Tile[,] grid;
+	//State
+	Tile[,] grid;
+
 
 	void Start ()
 	{
@@ -50,23 +58,79 @@ public class GridManager : MonoSingleton<GridManager>
 		HRatio = absWidth / gridWidth;
 		VRatio = absHeight / gridHeight;
 
+		//Create grid if needed
+		if (createGrid)
+			CreateGrid ();
+
+		//Fill grid array
+		InitializeGrid ();
+	}
+
+	///Use this as a tool to create the grid once, not every time you start the game
+	void CreateGrid ()
+	{
+		//Destroy current grid
+		foreach (GameObject go in transform.GetComponentsInChildren<GameObject>())
+			Destroy (go);
+
+		//Instantiate every 2nd tile as my asset represents 2x2 tiles
+		for (int i = minEast; i <= maxEast; i+=2)
+			for (int j = minNorth; j <= maxNorth; j+=2)
+				Instantiate (TileFree, ToAbs (new Vector2 (i, j)), Quaternion.identity, transform);
+
+		//Instantiate path tiles
+		foreach(Vector2Int p in path)
+			Instantiate (TilePath, ToAbs(new Vector2(2*p.x, 2*p.y), 0.01f), Quaternion.identity, transform);
+	}
+
+	///Create a grid array and fill it
+	void InitializeGrid ()
+	{
 		grid = new Tile[gridWidth+1,gridHeight+1];
 
 		Transform[] tiles = GetComponentsInChildren<Transform> ();
 
 		foreach (Transform t in tiles)
-		{
 			if (t!= transform)
-			{
-				Vector2 tGridPos = ToGrid (t.transform.position);
-				grid [(int)tGridPos.x, (int)tGridPos.y] = Tile.free;
-			}
-		}
+				grid [(int)ToGrid (t.transform.position).x, (int)ToGrid (t.transform.position).y] = Tile.free;
 
+		foreach(Vector2Int p in path)
+			setTile (new Vector2Int(2*p.x, 2*p.y), Tile.path);
 	}
 
-	///Snaps gameObject to the middle of the closest tile. Does not change its pos.y
-	public Vector2Int Snap (GameObject target)
+	//Set tile and adjacent positions to a certain tile type
+	public void setTile (Vector2Int pos, Tile type)
+	{
+		int x = pos.x;
+		int y = pos.y;
+
+		bool left = x == 0;
+		bool right = x == grid.GetLength(0)-1;
+		bool down= y == 0;
+		bool up = y == grid.GetLength(1)-1;
+
+		if (!left)
+		{
+			if (!down) grid [x - 1, y - 1] = type;
+			if (!up)
+			{
+				grid [x - 1, y + 1] = type;
+			}
+			grid [x - 1, y] = type;
+		}
+		if (!right)
+		{
+			if (!down) grid [x + 1, y - 1] = type;
+			if (!up) grid [x + 1, y + 1] = type;
+			grid [x + 1, y] = type;
+		}
+		if (!down) grid [x, y - 1] = type;
+		if (!up) grid [x, y + 1] = type;
+		grid [x, y] = type;
+	}
+
+	///Snaps gameObject to the middle of the closest tile. Does not change its pos.y. Returns tile coords
+	public Vector2Int SnapToTile (GameObject target)
 	{
 		Vector3 pos = target.transform.position;
 		Vector2 gridPos = ToGrid (pos);
@@ -82,7 +146,6 @@ public class GridManager : MonoSingleton<GridManager>
 
 		return new Vector2Int((int)gridPos.x, (int)gridPos.y);
 	}
-
 
 	/// displays a UI message is the tile is taken
 	public bool TileIsFree (Vector2Int tile)

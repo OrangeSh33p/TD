@@ -15,7 +15,7 @@ public class Spawner : MonoSingleton <Spawner>
 	[HideInInspector] public bool wavesAreOver = false;
 
 	//Arbitrary balancing
-	float spawnInterval = 0.5f;
+	float spawnInterval = 1f;
 
 	[System.Serializable] public struct Wave
 	{

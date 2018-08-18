@@ -31,10 +31,7 @@ public class LivesManager : MonoSingleton<LivesManager>
 
 	void PrintLives ()
 	{
-		string l = "";
-		for (int i=0; i<(lives); i++)
-			l += "❤";
-		livesText.text = l;
+		livesText.text = "x " + lives;
 	}
 
 }
