@@ -27,6 +27,8 @@ public class TimeManager : MonoSingleton<TimeManager>
 		PlayButton.onClick.AddListener (Play);
 		FastButton.onClick.AddListener (Fast);
 		SuperFastButton.onClick.AddListener (SuperFast);
+
+		Play ();
 	}
 
 	void Update ()

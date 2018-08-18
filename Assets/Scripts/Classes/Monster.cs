@@ -15,6 +15,7 @@ public class Monster : MonoBehaviour
 	float hp;
 	Vector3 origin;
 	Vector3 destination;
+	[HideInInspector] public float predictiveHP;
 
 	//References
 	GoldManager goldManager = GoldManager.Instance;
@@ -27,6 +28,7 @@ public class Monster : MonoBehaviour
 	{
 		transform.parent = monsterManager.transform;
 		hp = monsterManager.maxHp;
+		predictiveHP = hp;
 
 		origin = Spawner.Instance.transform.position;
 		destination = Base.Instance.transform.position;
@@ -55,6 +57,11 @@ public class Monster : MonoBehaviour
 		hpBar.value = hp / monsterManager.maxHp;
 		if (hp <= 0)
 			Death ();
+	}
+
+	public void PredictiveDamage (float damage)
+	{
+		predictiveHP -= damage;
 	}
 
 	void Death ()

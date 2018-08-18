@@ -7,6 +7,7 @@ public class TowerShoot : MonoBehaviour
 	//State
 	[HideInInspector] public bool purchaseInProgress = false;
 	float remainingReloadTime;
+	Transform target;
 
 	//Storage
 	List<Transform> monstersInRange = new List<Transform>();
@@ -15,6 +16,10 @@ public class TowerShoot : MonoBehaviour
 	MonsterManager monsterManager = MonsterManager.Instance;
 	TowerManager towerManager = TowerManager.Instance;
 	TimeManager timeManager = TimeManager.Instance;
+
+	public enum TargetPriority {First, Last, LowHP, Random};
+
+	public TargetPriority targetPriority;
 
 	void Start ()
 	{
@@ -38,16 +43,43 @@ public class TowerShoot : MonoBehaviour
 
 		monstersInRange.Clear ();
 		foreach (Transform m in monsters)
-			if (Vector3.Distance (transform.position, m.position) < towerManager.range)
+			if (Vector3.Distance (transform.position, m.position) < towerManager.range && m.GetComponent<Monster>().predictiveHP > 0)
 				monstersInRange.Add (m);
 
+		if (monstersInRange.Count != 0)
+			PickTarget();
+
 		return (monstersInRange.Count > 0);
+	}
+
+	void PickTarget ()
+	{
+		switch (targetPriority)
+		{
+		case TargetPriority.First:
+			target = monstersInRange [0];
+			break;
+		case TargetPriority.Last:
+			target = monstersInRange [monstersInRange.Count-1];
+			break;
+		case TargetPriority.Random:
+			target = monstersInRange [Random.Range (0, monstersInRange.Count)];
+			break;
+		case TargetPriority.LowHP:
+			target = monstersInRange [0];
+			foreach (Transform t in monstersInRange)
+				if (t.GetComponent<Monster> ().predictiveHP < target.GetComponent<Monster> ().predictiveHP)
+					target = t;
+			break;
+		}
 	}
 
 	void Shoot ()
 	{
 		//Spawn bullet, set its target
-		Instantiate (towerManager.bulletPrefab, transform.position + towerManager.bulletSpawnPoint, Quaternion.identity, transform.GetChild(1)).GetComponent<Bullet> ().targetTransform = monstersInRange[0];
+		GameObject bullet = Instantiate (towerManager.bulletPrefab, transform.position + towerManager.bulletSpawnPoint, Quaternion.identity, transform.GetChild(1));
+		bullet.GetComponent<Bullet> ().targetTransform = target;
+		target.GetComponent<Monster> ().PredictiveDamage (towerManager.damage);
 		Reload();
 	}
 

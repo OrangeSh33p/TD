@@ -9269,6 +9269,16 @@ Prefab:
       propertyPath: cancelBuildButton
       value: 
       objectReference: {fileID: 1166084844}
+    - target: {fileID: 114156742010766602, guid: 88b82a1945e581d4a81ae8953fb0a6bd,
+        type: 2}
+      propertyPath: bulletSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114156742010766602, guid: 88b82a1945e581d4a81ae8953fb0a6bd,
+        type: 2}
+      propertyPath: reloadingTime
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88b82a1945e581d4a81ae8953fb0a6bd, type: 2}
   m_IsPrefabParent: 0

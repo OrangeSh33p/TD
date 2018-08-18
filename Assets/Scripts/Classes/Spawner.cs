@@ -43,10 +43,7 @@ public class Spawner : MonoSingleton <Spawner>
 	///True if the last wave has been completely spawned
 	public bool WavesAreOver ()
 	{
-		if (waves.Count == 0)
-			return true;
-		else
-			return false;
+		return (waves.Count == 0);
 	}
 
 	///True if a wave is currently being spawned
@@ -67,8 +64,11 @@ public class Spawner : MonoSingleton <Spawner>
 		if (monstersLeftInWave == 0)
 		{
 			waves.RemoveAt (0);
-			monstersLeftInWave = waves [0].amount;
-			timeToNextWave += waves [0].time;
+			if (!WavesAreOver())
+			{
+				monstersLeftInWave = waves [0].amount;
+				timeToNextWave += waves [0].time;
+			}
 			return true;
 		}
 		else
