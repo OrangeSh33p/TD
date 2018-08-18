@@ -20,6 +20,7 @@ public class Monster : MonoBehaviour
 	GoldManager goldManager = GoldManager.Instance;
 	LivesManager livesManager = LivesManager.Instance;
 	MonsterManager monsterManager = MonsterManager.Instance;
+	TimeManager timeManager = TimeManager.Instance;
 	NavMeshAgent navMeshAgent;
 
 	void Start ()
@@ -32,11 +33,12 @@ public class Monster : MonoBehaviour
 
 		navMeshAgent = GetComponent<NavMeshAgent> ();
 		navMeshAgent.destination = destination;
-		navMeshAgent.speed = monsterManager.speed;
 	}
 
 	void Update ()
 	{
+		navMeshAgent.speed = monsterManager.speed * timeManager.timeScale;
+
 		if (Vector3.Distance (transform.position, destination) < 1)
 			Respawn ();
 	}
@@ -58,7 +60,7 @@ public class Monster : MonoBehaviour
 	void Death ()
 	{
 		goldManager.AddGold (monsterManager.reward);
-		if (Spawner.Instance.wavesAreOver && monsterManager.MonsterList().Count == 1)
+		if (Spawner.Instance.WavesAreOver() && monsterManager.MonsterList().Count == 1)
 			StartCoroutine (GameManager.Instance.Victory());
 		Destroy (gameObject);
 	}

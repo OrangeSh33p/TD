@@ -5,7 +5,8 @@ using UnityEngine;
 public class TowerShoot : MonoBehaviour 
 {
 	//State
-	[HideInInspector] public bool loaded = true;
+	[HideInInspector] public bool purchaseInProgress = false;
+	float remainingReloadTime;
 
 	//Storage
 	List<Transform> monstersInRange = new List<Transform>();
@@ -13,6 +14,7 @@ public class TowerShoot : MonoBehaviour
 	//References
 	MonsterManager monsterManager = MonsterManager.Instance;
 	TowerManager towerManager = TowerManager.Instance;
+	TimeManager timeManager = TimeManager.Instance;
 
 	void Start ()
 	{
@@ -22,7 +24,7 @@ public class TowerShoot : MonoBehaviour
 
 	void Update ()
 	{
-		if (loaded && AcquireTarget())
+		if (!purchaseInProgress && Loaded() && AcquireTarget())
 			Shoot ();
 	}
 
@@ -45,16 +47,25 @@ public class TowerShoot : MonoBehaviour
 	void Shoot ()
 	{
 		//Spawn bullet, set its target
-		Instantiate (towerManager.bulletPrefab, transform.position + towerManager.bulletSpawnPoint, Quaternion.identity, transform.GetChild(1)).GetComponent<Bullet> ().Initialize(monstersInRange [0]);
-		StartCoroutine (Reload ());
+		Instantiate (towerManager.bulletPrefab, transform.position + towerManager.bulletSpawnPoint, Quaternion.identity, transform.GetChild(1)).GetComponent<Bullet> ().targetTransform = monstersInRange[0];
+		Reload();
 	}
 
-
-	public IEnumerator Reload ()
+	///Returns true if tower is loaded, reloads otherwise
+	bool Loaded ()
 	{
-		loaded = false;
-		yield return new WaitForSeconds (towerManager.reloadingTime);
-		loaded = true;
-		yield return null;
+		if (remainingReloadTime <= 0)
+			return true;
+		else
+		{
+			remainingReloadTime -= Time.deltaTime * timeManager.timeScale;
+			return false;
+		}
+	}
+
+	///Restarts reloading sequence
+	public void Reload ()
+	{
+		remainingReloadTime = towerManager.reloadingTime;
 	}
 }

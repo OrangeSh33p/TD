@@ -10,12 +10,18 @@ public class Spawner : MonoSingleton <Spawner>
 
 	[Header("Boring variables")]
 	[SerializeField] GameObject monsterPrefab;
-
-	//State
-	[HideInInspector] public bool wavesAreOver = false;
+	[SerializeField] GameObject _timeManager;
 
 	//Arbitrary balancing
 	float spawnInterval = 1f;
+
+	//References
+	TimeManager timeManager = TimeManager.Instance;
+
+	//State
+	float timeToNextWave;
+	float timeToNextMonster;
+	public int monstersLeftInWave;
 
 	[System.Serializable] public struct Wave
 	{
@@ -25,23 +31,66 @@ public class Spawner : MonoSingleton <Spawner>
 
 	void Start ()
 	{
-		StartCoroutine (StartWaves ());
+		monstersLeftInWave = waves [0].amount;
 	}
 
-	IEnumerator StartWaves ()
+	void Update ()
 	{
-		//Start wave zero, then destroy it. Rinse and repeat
-		while (waves.Count > 0)
+		if (!WavesAreOver () && NextWaveReady () && !CurrentWaveIsOver () && NextMonsterReady ())
+			SpawnMonster ();
+	}
+
+	///True if the last wave has been completely spawned
+	public bool WavesAreOver ()
+	{
+		if (waves.Count == 0)
+			return true;
+		else
+			return false;
+	}
+
+	///True if a wave is currently being spawned
+	bool NextWaveReady ()
+	{
+		if (timeToNextWave <= 0)
+			return true;
+		else
 		{
-			Wave w = waves [0];
-			yield return new WaitForSeconds (w.time);
-			for (int i=0; i<w.amount; i++)
-			{
-				Instantiate (monsterPrefab, transform.position, Quaternion.identity);
-				yield return new WaitForSeconds (spawnInterval);
-			}
-			waves.RemoveAt (0);
+			timeToNextWave -= Time.deltaTime * _timeManager.GetComponent<TimeManager>().timeScale;
+			return false;
 		}
-		wavesAreOver = true;
+	}
+
+	///True if Every monster in current wave has been spawned
+	bool CurrentWaveIsOver ()
+	{
+		if (monstersLeftInWave == 0)
+		{
+			waves.RemoveAt (0);
+			monstersLeftInWave = waves [0].amount;
+			timeToNextWave += waves [0].time;
+			return true;
+		}
+		else
+			return false;
+	}
+
+	///True if a monster is ready to be spawned
+	bool NextMonsterReady ()
+	{
+		if (timeToNextMonster <= 0)
+			return true;
+		else
+		{
+			timeToNextMonster -= Time.deltaTime * _timeManager.GetComponent<TimeManager>().timeScale;
+			return false;
+		}
+	}
+
+	void SpawnMonster ()
+	{
+		Instantiate (monsterPrefab, transform.position, Quaternion.identity);
+		monstersLeftInWave--;
+		timeToNextMonster += spawnInterval;
 	}
 }

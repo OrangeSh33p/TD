@@ -42,8 +42,8 @@ public class TowerBuild : MonoBehaviour
 	public void StartPurchase ()
 	{
 		purchaseInProgress = true;
+		towerShoot.purchaseInProgress = true;
 		towerManager.SetCancelButton (true);
-		towerShoot.loaded = false;
 		SnapUnderCursor ();
 	}
 
@@ -80,7 +80,8 @@ public class TowerBuild : MonoBehaviour
 	void EndPurchase ()
 	{
 		purchaseInProgress = false;
+		towerShoot.purchaseInProgress = false;
 		towerManager.SetCancelButton (false);
-		StartCoroutine (towerShoot.Reload ());
+		towerShoot.Reload ();
 	}
 }
