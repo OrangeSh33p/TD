@@ -27,9 +27,21 @@ public class TowerBuild : MonoBehaviour
 		}
 	}
 
+	static List<Transform> _towerList;
+	public static List<Transform> towerList 
+	{
+		get 
+		{
+			if (_towerList==null)
+				_towerList = new List<Transform> ();
+			return _towerList;
+		}
+	}
+
 
 	void Start ()
 	{
+		towerList.Add (transform);
 		transform.parent = towerManager.transform;
 	}
 
@@ -37,6 +49,11 @@ public class TowerBuild : MonoBehaviour
 	{
 		if (purchaseInProgress)
 			ContinuePurchase();
+	}
+
+	void OnDestroy ()
+	{
+		towerList.Remove (transform);
 	}
 		
 	public void StartPurchase ()

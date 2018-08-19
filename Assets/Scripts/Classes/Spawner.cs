@@ -10,32 +10,30 @@ public class Spawner : MonoSingleton <Spawner>
 
 	[Header("Boring variables")]
 	[SerializeField] GameObject monsterPrefab;
-	[SerializeField] GameObject _timeManager;
 
 	//Arbitrary balancing
 	float spawnInterval = 1f;
 
 	//References
-	TimeManager timeManager = TimeManager.Instance;
+	TimeManager timeManager;
 
 	//State
-	float timeToNextWave;
 	float timeToNextMonster;
 	public int monstersLeftInWave;
 
 	[System.Serializable] public struct Wave
 	{
-		public int time;
+		public float time;
 		public int amount;
+		public Wave(int amt, float t){
+			amount = amt;
+			time = t;
+		}
 	}
 
 	void Start ()
 	{
-		Wave wave0 = waves [0];
-		wave0.amount = 5;
-		waves [0] = wave0;
-
-
+		timeManager = TimeManager.Instance;
 
 		monstersLeftInWave = waves [0].amount;
 	}
@@ -55,11 +53,11 @@ public class Spawner : MonoSingleton <Spawner>
 	///True if a wave is currently being spawned
 	bool NextWaveReady ()
 	{
-		if (timeToNextWave <= 0)
+		if (waves[0].time <= 0)
 			return true;
 		else
 		{
-			timeToNextWave -= Time.deltaTime * _timeManager.GetComponent<TimeManager>().timeScale;
+			waves [0] = new Wave (waves [0].amount, waves [0].time - Time.deltaTime * timeManager.timeScale);
 			return false;
 		}
 	}
@@ -67,14 +65,9 @@ public class Spawner : MonoSingleton <Spawner>
 	///True if Every monster in current wave has been spawned
 	bool CurrentWaveIsOver ()
 	{
-		if (monstersLeftInWave == 0)
+		if (waves[0].amount == 0)
 		{
 			waves.RemoveAt (0);
-			if (!WavesAreOver())
-			{
-				monstersLeftInWave = waves [0].amount;
-				timeToNextWave += waves [0].time;
-			}
 			return true;
 		}
 		else
@@ -88,7 +81,7 @@ public class Spawner : MonoSingleton <Spawner>
 			return true;
 		else
 		{
-			timeToNextMonster -= Time.deltaTime * _timeManager.GetComponent<TimeManager>().timeScale;
+			timeToNextMonster -= Time.deltaTime * timeManager.timeScale;
 			return false;
 		}
 	}
@@ -96,7 +89,7 @@ public class Spawner : MonoSingleton <Spawner>
 	void SpawnMonster ()
 	{
 		Instantiate (monsterPrefab, transform.position, Quaternion.identity);
-		monstersLeftInWave--;
+		waves [0] = new Wave (waves [0].amount - 1, waves [0].time);
 		timeToNextMonster += spawnInterval;
 	}
 }

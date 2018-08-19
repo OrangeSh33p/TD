@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Managers\TowerManager.cs" />
      <Compile Include="Assets\Scripts\Other\MonoSingleton.cs" />
      <Compile Include="Assets\Scripts\Other\Tweens.cs" />
+     <Compile Include="Assets\Scripts\Simple Behaviors\FixedRotation.cs" />
      <Compile Include="Assets\Scripts\Simple Behaviors\Rotate.cs" />
      <None Include="Assets\Packages\Simple UI\Fonts\OFL.txt" />
  <Reference Include="UnityEngine.UI">

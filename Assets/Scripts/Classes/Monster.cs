@@ -24,10 +24,21 @@ public class Monster : MonoBehaviour
 	TimeManager timeManager = TimeManager.Instance;
 	NavMeshAgent navMeshAgent;
 
+
+	static List<Transform> _monsterList;
+	public static List<Transform> monsterList 
+	{
+		get 
+		{
+			if (_monsterList==null)
+				_monsterList = new List<Transform> ();
+			return _monsterList;
+		}
+	}
+
 	void Start ()
 	{
 		monsterList.Add(this.transform);
-
 		transform.parent = monsterManager.transform;
 		hp = monsterManager.maxHp;
 		predictiveHP = hp;
@@ -40,7 +51,6 @@ public class Monster : MonoBehaviour
 	}
 
 	void OnDestroy(){
-		monsterList.Remove (this.transform);
 	}
 
 	void Update ()
@@ -73,21 +83,11 @@ public class Monster : MonoBehaviour
 	void Death ()
 	{
 		goldManager.AddGold (monsterManager.reward);
-		if (Spawner.Instance.WavesAreOver() && monsterManager.MonsterList().Count == 1)
+		monsterList.Remove (this.transform);
+
+		if (Spawner.Instance.WavesAreOver() && monsterList.Count == 1)
 			StartCoroutine (GameManager.Instance.Victory());
+		
 		Destroy (gameObject);
 	}
-
-
-	static List<Transform> _monsterList;
-	public static List<Transform> monsterList {
-		get {
-			if (_monsterList==null){
-				_monsterList = new List<Transform> ();
-			}
-			return _monsterList;
-		}
-	}
-
-
 }

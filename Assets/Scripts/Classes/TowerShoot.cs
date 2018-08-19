@@ -13,7 +13,6 @@ public class TowerShoot : MonoBehaviour
 	List<Transform> monstersInRange = new List<Transform>();
 
 	//References
-	MonsterManager monsterManager = MonsterManager.Instance;
 	TowerManager towerManager = TowerManager.Instance;
 	TimeManager timeManager = TimeManager.Instance;
 
@@ -24,7 +23,6 @@ public class TowerShoot : MonoBehaviour
 	void Start ()
 	{
 		towerManager = TowerManager.Instance; 
-		monsterManager = MonsterManager.Instance;
 	}
 
 	void Update ()
