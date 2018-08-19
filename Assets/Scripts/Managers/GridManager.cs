@@ -147,6 +147,18 @@ public class GridManager : MonoSingleton<GridManager>
 		return new Vector2Int((int)gridPos.x, (int)gridPos.y);
 	}
 
+	///Snaps gameObject to the middle of the closest tile + a z offset
+	public Vector2Int SnapToTile (GameObject target, float zOffset)
+	{
+		Vector3 pos = target.transform.position + new Vector3 (0, 0, zOffset);
+		Vector2 gridPos = ToGrid (pos);
+
+		gridPos = new Vector2 (Mathf.Clamp (gridPos.x, minEast, maxEast), Mathf.Clamp (gridPos.y, minNorth, maxNorth));
+		gridPos = new Vector2 (Mathf.Floor (gridPos.x + 0.5f), Mathf.Floor (gridPos.y + 0.5f));
+		target.transform.position = ToAbs (gridPos, pos.y);
+		return new Vector2Int((int)gridPos.x, (int)gridPos.y);
+	}
+
 	/// displays a UI message is the tile is taken
 	public bool TileIsFree (Vector2Int tile)
 	{

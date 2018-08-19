@@ -4,23 +4,34 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour 
 {
-	float y;
+	[Header("Axis")]
+	[SerializeField] bool x;
+	[SerializeField] bool y;
+	[SerializeField] bool z;
 
-	void Start ()
-	{
-		//StartCoroutine (Tweens.Linear (0, 360, 5, y));
-		Tweens.Quad(0,360,5, (float v)=>{
-			y = v;
-		} );
-			
-	}
+	[Header("Balancing")]
+	[SerializeField] float start;
+	[SerializeField] float finish;
+	[SerializeField] float duration;
+
+	//State
+	float value;
+	float timeTillRestart;
 
 	void Update ()
 	{
-		transform.rotation = Quaternion.Euler (new Vector3 (transform.rotation.x, y, transform.rotation.z));
-	}
+		if (x)
+			transform.rotation = Quaternion.Euler (new Vector3 (value, transform.rotation.y, transform.rotation.z));
+		if (y)
+			transform.rotation = Quaternion.Euler (new Vector3 (transform.rotation.x, value, transform.rotation.z));
+		if (z)
+			transform.rotation = Quaternion.Euler (new Vector3 (transform.rotation.x, transform.rotation.y, value));
 
-	void RotateMe(float toThis){
-		y = toThis;
+		timeTillRestart -= Time.deltaTime * TimeManager.Instance.timeScale;
+		if (timeTillRestart <= 0)
+		{
+			Tweens.Linear(start, finish, duration, (float f) => {value = f;});
+			timeTillRestart = duration;
+		}
 	}
 }

@@ -20,22 +20,28 @@ public static class Tweens
 	public static void Linear(float start, float end, float time, Action<float> callback) 
 	{
 		GameObject obj = new GameObject();
-		obj.AddComponent<TweenBehaviour>().StartCoroutine(DoTween(start, end, time, callback, LinearTween));
+		obj.AddComponent<TweenBehaviour>().StartCoroutine(DoTween(start, end, time, callback, LinearTween, ()=>{
+			GameObject.Destroy(obj);
+		}));
 	}
 
 	public static void Quad(float start, float end, float time, Action<float> callback) 
 	{
 		GameObject obj = new GameObject();
-		obj.AddComponent<TweenBehaviour>().StartCoroutine(DoTween(start, end, time, callback, QuadTween));
+		obj.AddComponent<TweenBehaviour>().StartCoroutine(DoTween(start, end, time, callback, QuadTween, ()=>{
+			GameObject.Destroy(obj);
+		}));
 	}
 
 	public static void Free(float start, float end, float time, Action<float> callback, TweenFunc func) 
 	{
 		GameObject obj = new GameObject();
-		obj.AddComponent<TweenBehaviour>().StartCoroutine(DoTween(start, end, time, callback, func));
+		obj.AddComponent<TweenBehaviour>().StartCoroutine(DoTween(start, end, time, callback, func, ()=>{
+			GameObject.Destroy(obj);
+		}));
 	}
 
-	static IEnumerator DoTween(float start, float end, float time, Action<float> callback, TweenFunc func)
+	static IEnumerator DoTween(float start, float end, float time, Action<float> callback, TweenFunc func, Action after)
 	{
 		float t = 0;
 		do

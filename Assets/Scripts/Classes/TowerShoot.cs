@@ -13,8 +13,8 @@ public class TowerShoot : MonoBehaviour
 	List<Transform> monstersInRange = new List<Transform>();
 
 	//References
-	TowerManager towerManager = TowerManager.Instance;
-	TimeManager timeManager = TimeManager.Instance;
+	TowerManager towerManager;
+	TimeManager timeManager;
 
 	public enum TargetPriority {First, Last, LowHP, Random};
 
@@ -23,6 +23,7 @@ public class TowerShoot : MonoBehaviour
 	void Start ()
 	{
 		towerManager = TowerManager.Instance; 
+		timeManager = TimeManager.Instance;
 	}
 
 	void Update ()

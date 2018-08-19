@@ -12,7 +12,7 @@ public class TowerBuild : MonoBehaviour
 	RaycastHit hit;
 
 	//References
-	GoldManager goldManager = GoldManager.Instance;
+	GoldManager goldManager;
 	TowerManager towerManager = TowerManager.Instance;
 	GridManager gridManager = GridManager.Instance;
 	TowerShoot _towerShoot;
@@ -41,6 +41,10 @@ public class TowerBuild : MonoBehaviour
 
 	void Start ()
 	{
+		towerManager = TowerManager.Instance;
+		goldManager = GoldManager.Instance;
+		gridManager = GridManager.Instance;
+
 		towerList.Add (transform);
 		transform.parent = towerManager.transform;
 	}
@@ -90,7 +94,7 @@ public class TowerBuild : MonoBehaviour
 		if (Physics.Raycast (ray, out hit, Mathf.Infinity, layerMask))
 			transform.position = hit.point;
 
-		return gridManager.SnapToTile (gameObject);
+		return gridManager.SnapToTile (gameObject, towerManager.zOffset);
 		
 	}
 

@@ -19,7 +19,7 @@ public class Spawner : MonoSingleton <Spawner>
 
 	//State
 	float timeToNextMonster;
-	public int monstersLeftInWave;
+	[HideInInspector] public int monstersLeftInWave;
 
 	[System.Serializable] public struct Wave
 	{
@@ -40,14 +40,18 @@ public class Spawner : MonoSingleton <Spawner>
 
 	void Update ()
 	{
-		if (!WavesAreOver () && NextWaveReady () && !CurrentWaveIsOver () && NextMonsterReady ())
+		if (!WavesAreOver && NextWaveReady () && !CurrentWaveIsOver () && NextMonsterReady ())
 			SpawnMonster ();
 	}
 
 	///True if the last wave has been completely spawned
-	public bool WavesAreOver ()
+	public bool WavesAreOver
 	{
-		return (waves.Count == 0);
+		get 
+		{
+			return (waves.Count == 0);
+			
+		}
 	}
 
 	///True if a wave is currently being spawned

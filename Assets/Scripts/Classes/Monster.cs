@@ -57,7 +57,7 @@ public class Monster : MonoBehaviour
 	{
 		navMeshAgent.speed = monsterManager.speed * timeManager.timeScale;
 
-		if (Vector3.Distance (transform.position, destination) < 1)
+		if (Vector3.Distance (transform.position, destination) < 3)
 			Respawn ();
 	}
 
@@ -85,8 +85,8 @@ public class Monster : MonoBehaviour
 		goldManager.AddGold (monsterManager.reward);
 		monsterList.Remove (this.transform);
 
-		if (Spawner.Instance.WavesAreOver() && monsterList.Count == 1)
-			StartCoroutine (GameManager.Instance.Victory());
+		if (Spawner.Instance.WavesAreOver && monsterList.Count == 0)
+			GameManager.Instance.victory = true;
 		
 		Destroy (gameObject);
 	}

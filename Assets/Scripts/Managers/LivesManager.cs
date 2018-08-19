@@ -25,7 +25,7 @@ public class LivesManager : MonoSingleton<LivesManager>
 	{
 		lives--;
 		if (lives == 0)
-			StartCoroutine (GameManager.Instance.GameOver ());
+			GameManager.Instance.defeat = true;
 		PrintLives ();
 	}
 
