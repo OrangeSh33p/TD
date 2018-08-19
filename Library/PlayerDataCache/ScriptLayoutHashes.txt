@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/couvr/Desktop/Projects/2018/TD/Builds/Build0819-2 - v0.1/v0.1-0819.apk
+C:/Users/couvr/Desktop/Projects/2018/TD/Builds/Build0819-3 - v0.2/v0.2-0819.apk
 SceneListBegin?
 Assets/Scenes/MobileTest/MobileTest.unity
 SceneListEnd?
@@ -161,5 +161,5 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Base
 172d454d23b9a40788634c6b57d91d91 Assembly-CSharp.dll:.Monster
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TowerBuild
-f630b82fc34b6d47f1cba3bc5214b39c Assembly-CSharp.dll:.GameManager
+ced96212e6e8c6fcfed795af6d901dec Assembly-CSharp.dll:.GameManager
 edc45978676597aec8b0f6e32c334667 Assembly-CSharp.dll:.FixedRotation
