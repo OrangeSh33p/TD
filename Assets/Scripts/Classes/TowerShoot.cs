@@ -36,7 +36,7 @@ public class TowerShoot : MonoBehaviour
 	/// Returns true if target has been acquired
 	bool AcquireTarget ()
 	{
-		List<Transform> monsters =	monsterManager.MonsterList();
+		List<Transform> monsters =	Monster.monsterList;
 
 		if (monsters.Count == 0)
 			return false;

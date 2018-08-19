@@ -31,6 +31,12 @@ public class Spawner : MonoSingleton <Spawner>
 
 	void Start ()
 	{
+		Wave wave0 = waves [0];
+		wave0.amount = 5;
+		waves [0] = wave0;
+
+
+
 		monstersLeftInWave = waves [0].amount;
 	}
 

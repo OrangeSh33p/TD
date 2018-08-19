@@ -26,6 +26,8 @@ public class Monster : MonoBehaviour
 
 	void Start ()
 	{
+		monsterList.Add(this.transform);
+
 		transform.parent = monsterManager.transform;
 		hp = monsterManager.maxHp;
 		predictiveHP = hp;
@@ -35,6 +37,10 @@ public class Monster : MonoBehaviour
 
 		navMeshAgent = GetComponent<NavMeshAgent> ();
 		navMeshAgent.destination = destination;
+	}
+
+	void OnDestroy(){
+		monsterList.Remove (this.transform);
 	}
 
 	void Update ()
@@ -71,4 +77,17 @@ public class Monster : MonoBehaviour
 			StartCoroutine (GameManager.Instance.Victory());
 		Destroy (gameObject);
 	}
+
+
+	static List<Transform> _monsterList;
+	public static List<Transform> monsterList {
+		get {
+			if (_monsterList==null){
+				_monsterList = new List<Transform> ();
+			}
+			return _monsterList;
+		}
+	}
+
+
 }

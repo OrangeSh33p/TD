@@ -500,6 +500,18 @@ Prefab:
       propertyPath: CantBuildOnTowerText
       value: 
       objectReference: {fileID: 1690436644}
+    - target: {fileID: 4527041694578784, guid: 16cbbbf2a766e304f82736a3077edd5e, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527041694578784, guid: 16cbbbf2a766e304f82736a3077edd5e, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527041694578784, guid: 16cbbbf2a766e304f82736a3077edd5e, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 16cbbbf2a766e304f82736a3077edd5e, type: 2}
   m_IsPrefabParent: 0
