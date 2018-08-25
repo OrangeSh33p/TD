@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Monster : MonoBehaviour 
 {
 
+
 	//Change HP Bar system
 	[Header("Boring Variables")]
 	public Slider hpBar;
@@ -16,6 +17,8 @@ public class Monster : MonoBehaviour
 	Vector3 origin;
 	Vector3 destination;
 	[HideInInspector] public float predictiveHP;
+	int currentStep;
+
 
 	//References
 	GoldManager goldManager = GoldManager.Instance;
@@ -46,8 +49,8 @@ public class Monster : MonoBehaviour
 		origin = Spawner.Instance.transform.position;
 		destination = Base.Instance.transform.position;
 
-		navMeshAgent = GetComponent<NavMeshAgent> ();
-		navMeshAgent.destination = destination;
+		/*navMeshAgent = GetComponent<NavMeshAgent> ();
+		navMeshAgent.destination = destination;*/
 	}
 
 	void OnDestroy(){
@@ -55,16 +58,19 @@ public class Monster : MonoBehaviour
 
 	void Update ()
 	{
-		navMeshAgent.speed = monsterManager.speed * timeManager.timeScale;
+		//navMeshAgent.speed = monsterManager.speed * timeManager.timeScale;
+		Move();
+		CheckIfCurrentStepReached();
 
-		if (Vector3.Distance (transform.position, destination) < 3)
-			Respawn ();
+		if (currentStep==monsterManager.path.Count)
+			Respawn();
 	}
 
 	void Respawn ()
 	{
 		livesManager.LoseLife ();
 		transform.position = origin;
+		currentStep=0;
 	}
 
 	public void Damage (float damage)
@@ -89,5 +95,18 @@ public class Monster : MonoBehaviour
 			GameManager.Instance.victory = true;
 		
 		Destroy (gameObject);
+	}
+
+	void Move ()
+	{
+		transform.LookAt (monsterManager.path[currentStep]);
+		transform.position += transform.forward * Mathf.Min (monsterManager.speed * Time.deltaTime * timeManager.timeScale, Vector3.Distance (transform.position, monsterManager.path[currentStep].transform.position));
+	}
+	void CheckIfCurrentStepReached ()
+	{
+		if (Vector3.Distance(transform.position, monsterManager.path[currentStep].transform.position) < 1)
+		{
+			currentStep ++;		
+		}	
 	}
 }
