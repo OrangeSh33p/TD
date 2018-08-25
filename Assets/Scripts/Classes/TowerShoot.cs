@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class TowerShoot : MonoBehaviour 
 {
+	[Header("Balancing")]
+	[SerializeField] TowerManager.towerName towerTypeName;
+	[SerializeField] TargetPriority targetPriority;
+
 	//State
 	[HideInInspector] public bool purchaseInProgress = false;
 	float remainingReloadTime;
 	Transform target;
+	[HideInInspector] public TowerManager.TowerType type;
 
 	//Storage
 	List<Transform> monstersInRange = new List<Transform>();
@@ -16,33 +21,33 @@ public class TowerShoot : MonoBehaviour
 	TowerManager towerManager;
 	TimeManager timeManager;
 
+	//Declarations
 	public enum TargetPriority {First, Last, LowHP, Random};
 
-	public TargetPriority targetPriority;
 
-	void Start ()
-	{
+	void Start () {
 		towerManager = TowerManager.Instance; 
 		timeManager = TimeManager.Instance;
 	}
 
-	void Update ()
-	{
+	void Update () {
 		if (!purchaseInProgress && Loaded() && AcquireTarget())
 			Shoot ();
+		
+		if (towerTypeName == TowerManager.towerName.standard)
+			type = towerManager.towers.standard;
+		if (towerTypeName == TowerManager.towerName.fast)
+			type = towerManager.towers.fast;
 	}
 
 	/// Returns true if target has been acquired
-	bool AcquireTarget ()
-	{
-		List<Transform> monsters =	Monster.monsterList;
-
-		if (monsters.Count == 0)
+	bool AcquireTarget () {
+		if (Monster.monsterList.Count == 0)
 			return false;
 
 		monstersInRange.Clear ();
-		foreach (Transform m in monsters)
-			if (Vector3.Distance (transform.position, m.position) < towerManager.range && m.GetComponent<Monster>().predictiveHP > 0)
+		foreach (Transform m in Monster.monsterList)
+			if (Vector3.Distance (transform.position, m.position) < type.range && m.GetComponent<Monster>().predictiveHP > 0)
 				monstersInRange.Add (m);
 
 		if (monstersInRange.Count != 0)
@@ -51,10 +56,8 @@ public class TowerShoot : MonoBehaviour
 		return (monstersInRange.Count > 0);
 	}
 
-	void PickTarget ()
-	{
-		switch (targetPriority)
-		{
+	void PickTarget () {
+		switch (targetPriority) {
 		case TargetPriority.First:
 			target = monstersInRange [0];
 			break;
@@ -73,30 +76,27 @@ public class TowerShoot : MonoBehaviour
 		}
 	}
 
-	void Shoot ()
-	{
+	void Shoot () {
 		//Spawn bullet, set its target
-		GameObject bullet = Instantiate (towerManager.bulletPrefab, transform.position + towerManager.bulletSpawnPoint, Quaternion.identity, transform.GetChild(1));
+		GameObject bullet = Instantiate (type.bulletPrefab, transform.position + type.bulletSpawnPoint, Quaternion.identity, transform.GetChild(1));
 		bullet.GetComponent<Bullet> ().targetTransform = target;
-		target.GetComponent<Monster> ().PredictiveDamage (towerManager.damage);
+		bullet.GetComponent<Bullet> ().type = type;
+		target.GetComponent<Monster> ().PredictiveDamage (type.damage);
 		Reload();
 	}
 
-	///Returns true if tower is loaded, reloads otherwise
-	bool Loaded ()
-	{
+	///Return true if tower is loaded, reload otherwise
+	bool Loaded () {
 		if (remainingReloadTime <= 0)
 			return true;
-		else
-		{
+		else {
 			remainingReloadTime -= Time.deltaTime * timeManager.timeScale;
 			return false;
 		}
 	}
 
-	///Restarts reloading sequence
-	public void Reload ()
-	{
-		remainingReloadTime = towerManager.reloadingTime;
+	///Restart reloading sequence
+	public void Reload () {
+		remainingReloadTime = type.reloadingTime;
 	}
 }

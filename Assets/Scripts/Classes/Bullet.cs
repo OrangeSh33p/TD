@@ -6,9 +6,10 @@ public class Bullet : MonoBehaviour
 {
 	//State
 	[HideInInspector] public Transform targetTransform;
+	[HideInInspector] public TowerManager.TowerType type;
 
 	//References
-	TowerManager towerManager = TowerManager.Instance;
+	//TowerManager towerManager = TowerManager.Instance;
 	TimeManager timeManager = TimeManager.Instance;
 
 	void Update () 
@@ -25,7 +26,8 @@ public class Bullet : MonoBehaviour
 	void Move ()
 	{
 		transform.LookAt (targetTransform);
-		transform.position += transform.forward * Mathf.Min (towerManager.bulletSpeed * Time.deltaTime * timeManager.timeScale, Vector3.Distance (transform.position, targetTransform.position));
+		Debug.Log (type.bulletSpeed * Time.deltaTime * timeManager.timeScale);
+		transform.position += transform.forward * Mathf.Min (type.bulletSpeed * Time.deltaTime * timeManager.timeScale, Vector3.Distance (transform.position, targetTransform.position));
 	}
 
 	///Triggers damage sequence if close enough to the target
@@ -33,7 +35,7 @@ public class Bullet : MonoBehaviour
 	{
 		if (Vector3.Distance(transform.position, targetTransform.position) < 1)
 		{
-			targetTransform.GetComponent<Monster> ().Damage (towerManager.damage);
+			targetTransform.GetComponent<Monster> ().Damage (type.damage);
 			Destroy (gameObject);		
 		}	
 	}

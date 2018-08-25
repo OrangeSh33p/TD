@@ -75,7 +75,7 @@ public class TowerBuild : MonoBehaviour
 
 		if (Input.GetMouseButtonUp (0) 						 //If player clicked
 			&& gridManager.TileIsFree(gridPos) 			   	 //and there is no tower on this tile
-			&& goldManager.AddGold (-towerManager.price))    //and player has enough money (check for money at the end because it also subtracts the money)
+			&& goldManager.AddGold (-towerShoot.type.price))    //and player has enough money (check for money at the end because it also subtracts the money)
 		{
 			//Set tile and adjacent ones to "tower" in the gridmanager
 			gridManager.setTile (gridPos, GridManager.Tile.tower);
@@ -94,7 +94,7 @@ public class TowerBuild : MonoBehaviour
 		if (Physics.Raycast (ray, out hit, Mathf.Infinity, layerMask))
 			transform.position = hit.point;
 
-		return gridManager.SnapToTile (gameObject, towerManager.zOffset);
+		return gridManager.SnapToTile (gameObject);
 		
 	}
 
