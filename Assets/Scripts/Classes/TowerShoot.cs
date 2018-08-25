@@ -11,7 +11,7 @@ public class TowerShoot : MonoBehaviour {
 	[HideInInspector] public bool purchaseInProgress = false;
 	[HideInInspector] public TowerManager.TowerType type;
 	float remainingReloadTime;
-	Transform target;
+	public Transform target;
 
 	//Storage
 	List<Transform> monstersInRange = new List<Transform>();

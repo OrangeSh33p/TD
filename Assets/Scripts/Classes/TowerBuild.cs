@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class TowerBuild : MonoBehaviour 
 {
+	[Header("Boring Variables")]
+	[SerializeField] GameObject visuals;
+	[SerializeField] Material transparent;
+	[SerializeField] Shader transparentRed;
+	[SerializeField] Shader opaque;
+
 	//State
 	bool purchaseInProgress = false;
 
@@ -73,15 +79,22 @@ public class TowerBuild : MonoBehaviour
 	{
 		Vector2Int gridPos = SnapUnderCursor ();
 
-		if (Input.GetMouseButtonUp (0) 					     	 //If player clicked
-			&& gridManager.TileIsFree(gridPos) 			   		 //and there is no tower on this tile
-			&& goldManager.AddGold (-towerShoot.type.price))     //and player has enough money (check for money at the end because it also subtracts the money)
-		{
-			//Set tile and adjacent ones to "tower" in the gridmanager
-			gridManager.setTile (gridPos, GridManager.Tile.tower);
+		if (gridManager.TileIsFree (gridPos)) {
+			//shader = transparent
+			setShader();
 
-			//Complete the purchase
-			EndPurchase(); 
+			if (Input.GetMouseButtonUp (0)							 //If player clicked
+			    && goldManager.AddGold (-towerShoot.type.price))     //and has enough money (check for money at the end because it also subtracts the money)
+			{
+				//Set tile and adjacent ones to "tower" in the gridmanager
+				gridManager.setTile (gridPos, GridManager.Tile.tower);
+
+				//Complete the purchase
+				EndPurchase (); 
+			}
+		}
+		else {
+			//shader = tranparent red
 		}
 	}
 
@@ -100,9 +113,15 @@ public class TowerBuild : MonoBehaviour
 
 	void EndPurchase ()
 	{
+		//shader = opaque
 		purchaseInProgress = false;
 		towerShoot.purchaseInProgress = false;
 		towerManager.SetCancelButton (false, towerShoot.type);
 		towerShoot.Reload ();
+	}
+
+	void setShader ()
+	{
+		//visuals.GetComponent<Material> ().color = new Color (204 / 255, 204 / 255, 204 / 255, 0.25f);
 	}
 }
