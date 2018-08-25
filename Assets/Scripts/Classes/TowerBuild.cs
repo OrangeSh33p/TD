@@ -64,7 +64,7 @@ public class TowerBuild : MonoBehaviour
 	{
 		purchaseInProgress = true;
 		towerShoot.purchaseInProgress = true;
-		towerManager.SetCancelButton (true);
+		towerManager.SetCancelButton (true, towerShoot.type);
 		SnapUnderCursor ();
 	}
 
@@ -73,9 +73,9 @@ public class TowerBuild : MonoBehaviour
 	{
 		Vector2Int gridPos = SnapUnderCursor ();
 
-		if (Input.GetMouseButtonUp (0) 						 //If player clicked
-			&& gridManager.TileIsFree(gridPos) 			   	 //and there is no tower on this tile
-			&& goldManager.AddGold (-towerShoot.type.price))    //and player has enough money (check for money at the end because it also subtracts the money)
+		if (Input.GetMouseButtonUp (0) 					     	 //If player clicked
+			&& gridManager.TileIsFree(gridPos) 			   		 //and there is no tower on this tile
+			&& goldManager.AddGold (-towerShoot.type.price))     //and player has enough money (check for money at the end because it also subtracts the money)
 		{
 			//Set tile and adjacent ones to "tower" in the gridmanager
 			gridManager.setTile (gridPos, GridManager.Tile.tower);
@@ -102,7 +102,7 @@ public class TowerBuild : MonoBehaviour
 	{
 		purchaseInProgress = false;
 		towerShoot.purchaseInProgress = false;
-		towerManager.SetCancelButton (false);
+		towerManager.SetCancelButton (false, towerShoot.type);
 		towerShoot.Reload ();
 	}
 }

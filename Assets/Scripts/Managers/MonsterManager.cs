@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MonsterManager : MonoSingleton <MonsterManager>
 {
-	public List<Transform> path;
 	
 	[Header ("Balancing")]
 	public float speed;

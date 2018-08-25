@@ -23,7 +23,7 @@ GameObject:
   m_Layer: 0
   m_Name: TowerManager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -51,14 +51,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b378e7551ae22141b4d09e1ccb9da01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 50
-  range: 20
-  reloadingTime: 0.5
-  damage: 1
-  bulletSpeed: 50
-  bulletPrefab: {fileID: 1081709547453276, guid: 7c4cbc240913cd74590c50e312a8d538,
-    type: 2}
-  bulletSpawnPoint: {x: 0, y: 12, z: 0}
+  towers:
+    standard:
+      price: 50
+      range: 20
+      reloadingTime: 1
+      damage: 1
+      bulletSpeed: 50
+      bulletPrefab: {fileID: 1081709547453276, guid: 7c4cbc240913cd74590c50e312a8d538,
+        type: 2}
+      bulletSpawnPoint: {x: 0, y: 13, z: 0}
+    fast:
+      price: 50
+      range: 20
+      reloadingTime: 0.2
+      damage: 1
+      bulletSpeed: 50
+      bulletPrefab: {fileID: 1876931515450176, guid: 7766d1a32900e9840a5ba00f40e2234a,
+        type: 2}
+      bulletSpawnPoint: {x: 0, y: 13, z: 0}
   buildTowerButton: {fileID: 0}
   cancelBuildButton: {fileID: 0}
   towerPrefab: {fileID: 1227333984325806, guid: 8f9b39a74c491d34889bc3652ba4e175,

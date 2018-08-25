@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerShoot : MonoBehaviour 
-{
+public class TowerShoot : MonoBehaviour {
 	[Header("Balancing")]
 	[SerializeField] TowerManager.towerName towerTypeName;
 	[SerializeField] TargetPriority targetPriority;
 
 	//State
 	[HideInInspector] public bool purchaseInProgress = false;
+	[HideInInspector] public TowerManager.TowerType type;
 	float remainingReloadTime;
 	Transform target;
-	[HideInInspector] public TowerManager.TowerType type;
 
 	//Storage
 	List<Transform> monstersInRange = new List<Transform>();
@@ -60,9 +59,15 @@ public class TowerShoot : MonoBehaviour
 		switch (targetPriority) {
 		case TargetPriority.First:
 			target = monstersInRange [0];
+			foreach (Transform t in monstersInRange)
+				if (t.GetComponent<Monster> ().distanceWalked > target.GetComponent<Monster> ().distanceWalked)
+					target = t;
 			break;
 		case TargetPriority.Last:
-			target = monstersInRange [monstersInRange.Count-1];
+			target = monstersInRange [0];
+			foreach (Transform t in monstersInRange)
+				if (t.GetComponent<Monster> ().distanceWalked < target.GetComponent<Monster> ().distanceWalked)
+					target = t;
 			break;
 		case TargetPriority.Random:
 			target = monstersInRange [Random.Range (0, monstersInRange.Count)];

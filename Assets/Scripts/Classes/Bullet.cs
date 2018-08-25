@@ -26,7 +26,6 @@ public class Bullet : MonoBehaviour
 	void Move ()
 	{
 		transform.LookAt (targetTransform);
-		Debug.Log (type.bulletSpeed * Time.deltaTime * timeManager.timeScale);
 		transform.position += transform.forward * Mathf.Min (type.bulletSpeed * Time.deltaTime * timeManager.timeScale, Vector3.Distance (transform.position, targetTransform.position));
 	}
 

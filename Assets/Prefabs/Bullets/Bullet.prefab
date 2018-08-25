@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1081709547453276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.48, y: 7.01, z: -12.96}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,6 +95,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384e81d337b234244bede9ce540bac18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTransform: {fileID: 0}
+  type:
+    price: 0
+    range: 0
+    reloadingTime: 0
+    damage: 0
+    bulletSpeed: 0
+    bulletPrefab: {fileID: 0}
+    bulletSpawnPoint: {x: 0, y: 0, z: 0}
 --- !u!135 &135044040327574858
 SphereCollider:
   m_ObjectHideFlags: 1
