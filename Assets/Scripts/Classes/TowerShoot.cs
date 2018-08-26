@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TowerShoot : MonoBehaviour {
 	[Header("Balancing")]
-	[SerializeField] TowerManager.towerName towerTypeName;
+	public int typeNumber;
 	[SerializeField] TargetPriority targetPriority;
 
 	//State
@@ -27,16 +27,13 @@ public class TowerShoot : MonoBehaviour {
 	void Start () {
 		towerManager = TowerManager.Instance; 
 		timeManager = TimeManager.Instance;
+
+		type = towerManager.towers [typeNumber];
 	}
 
 	void Update () {
 		if (!purchaseInProgress && Loaded() && AcquireTarget())
 			Shoot ();
-		
-		if (towerTypeName == TowerManager.towerName.standard)
-			type = towerManager.towers.standard;
-		if (towerTypeName == TowerManager.towerName.fast)
-			type = towerManager.towers.fast;
 	}
 
 	/// Returns true if target has been acquired

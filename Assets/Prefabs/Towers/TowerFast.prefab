@@ -832,10 +832,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68aa25a84b3a6fe40869cb3ee2afbf8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerTypeName: 1
+  typeNumber: 1
   targetPriority: 0
   purchaseInProgress: 0
   type:
+    prefab: {fileID: 0}
     price: 0
     range: 0
     reloadingTime: 0
@@ -843,6 +844,8 @@ MonoBehaviour:
     bulletSpeed: 0
     bulletPrefab: {fileID: 0}
     bulletSpawnPoint: {x: 0, y: 0, z: 0}
+    buildButton: {fileID: 0}
+    cancelButton: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &114131502144420738
 MonoBehaviour:
@@ -867,7 +870,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341e113e677ccd34da10a46d4e6ed913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visuals: {fileID: 1111132552933146}
-  transparent: {fileID: 0}
-  transparentRed: {fileID: 0}
-  opaque: {fileID: 0}
+  visuals:
+  - {fileID: 1111132552933146}
+  - {fileID: 1165587686502624}
+  - {fileID: 1838088310412890}
+  - {fileID: 1277815917515032}
+  - {fileID: 1061988044693624}
+  - {fileID: 1287781242149420}
+  - {fileID: 1189322746374394}
+  - {fileID: 1928286997261156}
+  transparent: {fileID: 2100000, guid: f85cca7c5ea623a4f8d0898ab3f5508e, type: 2}
+  transparentRed: {fileID: 2100000, guid: 5a4f679d8e6b52d4d90b40471a907a73, type: 2}
+  opaque: {fileID: 2100000, guid: b0a60a3b9df75bd47a936734dc4b7401, type: 2}

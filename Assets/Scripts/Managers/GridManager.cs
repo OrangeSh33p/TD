@@ -95,12 +95,11 @@ public class GridManager : MonoSingleton<GridManager>
 				grid [(int)ToGrid (t.transform.position).x, (int)ToGrid (t.transform.position).y] = Tile.free;
 
 		foreach(Vector2Int p in path)
-			setTile (new Vector2Int(2*p.x, 2*p.y), Tile.path);
+			SetAdjacentTiles (new Vector2Int(2*p.x, 2*p.y), Tile.path);
 	}
 
-	//Set tile and adjacent positions to a certain tile type
-	public void setTile (Vector2Int pos, Tile type)
-	{
+	//Set "pos" and adjacent positions to "type"
+	public void SetAdjacentTiles (Vector2Int pos, Tile type) {
 		int x = pos.x;
 		int y = pos.y;
 
@@ -159,34 +158,27 @@ public class GridManager : MonoSingleton<GridManager>
 		return new Vector2Int((int)gridPos.x, (int)gridPos.y);
 	}
 
-	/// displays a UI message is the tile is taken
-	public bool TileIsFree (Vector2Int tile)
-	{
+	public bool TileIsFree (Vector2Int tile) {
 		Tile t = grid [tile.x, tile.y];
-		if (t == Tile.free)
-			return true;
-		else if (t == Tile.path)
-		{
-			StartCoroutine (DisplayCantBuildOnPathText ());
-			return false;
-		}
-		else if (t == Tile.tower)
-		{
-			StartCoroutine (DisplayCantBuildOnTowerText ());
-			return false;
-		}
-		return false;
+		return (t == Tile.free);
 	}
 
-	IEnumerator DisplayCantBuildOnPathText ()
-	{
+	/// displays a UI message is the tile is taken
+	public void TryBuildOnTile (Vector2Int tile) {
+		Tile t = grid [tile.x, tile.y];
+		if (t == Tile.path)
+			StartCoroutine (DisplayCantBuildOnPathText ());
+		else if (t == Tile.tower)
+			StartCoroutine (DisplayCantBuildOnTowerText ());
+	}
+
+	IEnumerator DisplayCantBuildOnPathText () {
 		CantBuildOnPathText.SetActive (true);
 		yield return new WaitForSeconds (1);
 		CantBuildOnPathText.SetActive (false);
 	}
 
-	IEnumerator DisplayCantBuildOnTowerText ()
-	{
+	IEnumerator DisplayCantBuildOnTowerText () {
 		CantBuildOnTowerText.SetActive (true);
 		yield return new WaitForSeconds (1);
 		CantBuildOnTowerText.SetActive (false);

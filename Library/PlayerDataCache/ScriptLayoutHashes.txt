@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/couvr/Desktop/Projects/2018/TD/Builds/Build0819-4 - v0.3/v0.3-0819.apk
+C:/Users/couvr/Desktop/Projects/2018/TD/Builds/Build0826 - v0.4/v0.4-0826.apk
 SceneListBegin?
 Assets/Scenes/MobileTest/MobileTest.unity
 SceneListEnd?
@@ -110,7 +110,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-539f70c20f4b8508a9c4439536dce726 Assembly-CSharp.dll:.Bullet
+2962cbaa6dc85a7fa8ce5a9aa763a0a8 Assembly-CSharp.dll:.Bullet
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
@@ -121,9 +121,10 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 f772dcfb0b6140b4462c0c091c0c8167 Assembly-CSharp.dll:.GridManager
 4330cb401a1b2b5fd1524cf94cd78d37 Assembly-CSharp.dll:.Spawner
-5c32f1c9fa49c76b48acfec94a129e51 Assembly-CSharp.dll:.TowerManager
+e3aa843fa2c4d194bdffada78fe71fb2 Assembly-CSharp.dll:.TowerManager
 2704de8a02f0c490a9749029d4f0a9b7 Assembly-CSharp.dll:.GoldManager
-7c9b80340d842939eb2e87720656239e Assembly-CSharp.dll:.TowerShoot
+f9e70f30dd7c4f01678fb936099bda64 Assembly-CSharp.dll:.TowerShoot
+be1cc093b4d7fd1905159d6a938e5b89 Assembly-CSharp.dll:.RotateTowardsTarget
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -139,6 +140,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 88e491c82d5dad815c647856b5f42681 Assembly-CSharp.dll:.MonsterManager
+c4966781d7d79ec67fcd29b3f19a8911 Assembly-CSharp.dll:.transparent
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 96d0fbde9fd209878a0a291f82c9bcdd UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
@@ -159,7 +161,8 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 462fa9ce0aacccd2acf70bc269b12584 Assembly-CSharp.dll:.LivesManager
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Base
-172d454d23b9a40788634c6b57d91d91 Assembly-CSharp.dll:.Monster
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TowerBuild
+04d2496acd3a2c9235cd471cfaed9b79 Assembly-CSharp.dll:.Monster
+cd59d10435ef675fb07df37bdc6972c9 Assembly-CSharp.dll:.TowerBuild
 ced96212e6e8c6fcfed795af6d901dec Assembly-CSharp.dll:.GameManager
 edc45978676597aec8b0f6e32c334667 Assembly-CSharp.dll:.FixedRotation
+c6dbb73deb7ae573d6706ee89801e55c Assembly-CSharp.dll:.CloudManager

@@ -52,25 +52,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towers:
-    standard:
-      price: 50
-      range: 20
-      reloadingTime: 1
-      damage: 1
-      bulletSpeed: 50
-      bulletPrefab: {fileID: 1081709547453276, guid: 7c4cbc240913cd74590c50e312a8d538,
-        type: 2}
-      bulletSpawnPoint: {x: 0, y: 13, z: 0}
-    fast:
-      price: 50
-      range: 20
-      reloadingTime: 0.2
-      damage: 1
-      bulletSpeed: 50
-      bulletPrefab: {fileID: 1876931515450176, guid: 7766d1a32900e9840a5ba00f40e2234a,
-        type: 2}
-      bulletSpawnPoint: {x: 0, y: 13, z: 0}
-  buildTowerButton: {fileID: 0}
-  cancelBuildButton: {fileID: 0}
-  towerPrefab: {fileID: 1227333984325806, guid: 8f9b39a74c491d34889bc3652ba4e175,
-    type: 2}
+  - prefab: {fileID: 1227333984325806, guid: 8f9b39a74c491d34889bc3652ba4e175, type: 2}
+    price: 100
+    range: 20
+    reloadingTime: 2
+    damage: 4
+    bulletSpeed: 50
+    bulletPrefab: {fileID: 1081709547453276, guid: 7c4cbc240913cd74590c50e312a8d538,
+      type: 2}
+    bulletSpawnPoint: {x: 0, y: 13, z: 0}
+    buildButton: {fileID: 0}
+    cancelButton: {fileID: 0}
+  - prefab: {fileID: 1053635697539900, guid: 47f32fa0dd28e4d4cb9943459bf562bc, type: 2}
+    price: 100
+    range: 20
+    reloadingTime: 0.5
+    damage: 1
+    bulletSpeed: 50
+    bulletPrefab: {fileID: 1876931515450176, guid: 7766d1a32900e9840a5ba00f40e2234a,
+      type: 2}
+    bulletSpawnPoint: {x: 0, y: 13, z: 0}
+    buildButton: {fileID: 0}
+    cancelButton: {fileID: 0}

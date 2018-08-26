@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GoldManager : MonoSingleton<GoldManager> 
-{
+public class GoldManager : MonoSingleton<GoldManager> {
 	[Header("Balancing")]
 	[SerializeField] int startGold;
 
@@ -15,35 +14,33 @@ public class GoldManager : MonoSingleton<GoldManager>
 	//State
 	int gold;
 
-	void Start ()
-	{
+	void Start () {
 		gold = startGold;
 		PrintGold ();
 	}
 
-	/// returns true if the player has enough gold
-	public bool AddGold (int amount)
+	///return true if player has more than "amount"
+	public bool CanAfford (int amount)
 	{
-		if (gold + amount < 0)
-		{
-			StartCoroutine (DisplayInsufficientGoldText ());
-			return false;
-		}
-		else
-		{
-			gold += amount;
-			PrintGold ();
-			return true;
-		}
+		return (gold - amount >= 0);
 	}
 
-	void PrintGold ()
+	///returns true if the player has enough gold, displays error message otherwise;
+	public void AddGold (int amount)
 	{
+		if (CanAfford(-amount)) {
+			gold += amount;
+			PrintGold ();
+		}
+		else
+			StartCoroutine (DisplayInsufficientGoldText ());
+	}
+
+	void PrintGold () {
 		goldText.text = "x " + gold;
 	}
 
-	public IEnumerator DisplayInsufficientGoldText ()
-	{
+	public IEnumerator DisplayInsufficientGoldText () {
 		insufficientGoldText.SetActive (true);
 		yield return new WaitForSeconds (1);
 		insufficientGoldText.SetActive (false);
