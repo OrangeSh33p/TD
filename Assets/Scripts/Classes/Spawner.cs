@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Spawner : MonoSingleton <Spawner> 
-{
+public class Spawner : MonoSingleton <Spawner> {
 	[Header("Balancing")]
-	[SerializeField] List<Wave> waves = new List<Wave>();
+	[SerializeField] List<Wave> waves = new List<Wave> ();
 
 	[Header("Boring variables")]
 	[SerializeField] GameObject monsterPrefab;
@@ -18,59 +17,49 @@ public class Spawner : MonoSingleton <Spawner>
 	TimeManager timeManager;
 
 	//State
-	float timeToNextMonster;
 	[HideInInspector] public int monstersLeftInWave;
+	float timeToNextMonster;
 
-	[System.Serializable] public struct Wave
-	{
-		public float time;
-		public int amount;
-		public Wave(int amt, float t){
-			amount = amt;
-			time = t;
+	public bool WavesAreOver {
+		get  {
+			return (waves.Count == 0);
 		}
 	}
 
-	void Start ()
-	{
+	//Structs
+	[System.Serializable] public struct Wave {
+		public float time;
+		public int amount;
+		public Wave (int amount, float time) {
+			this.amount = amount;
+			this.time = time;
+		}
+	}
+
+	void Start () {
 		timeManager = TimeManager.Instance;
 
 		monstersLeftInWave = waves [0].amount;
 	}
 
-	void Update ()
-	{
+	void Update () {
 		if (!WavesAreOver && NextWaveReady () && !CurrentWaveIsOver () && NextMonsterReady ())
 			SpawnMonster ();
 	}
 
-	///True if the last wave has been completely spawned
-	public bool WavesAreOver
-	{
-		get 
-		{
-			return (waves.Count == 0);
-			
-		}
-	}
-
 	///True if a wave is currently being spawned
-	bool NextWaveReady ()
-	{
+	bool NextWaveReady () {
 		if (waves[0].time <= 0)
 			return true;
-		else
-		{
+		else {
 			waves [0] = new Wave (waves [0].amount, waves [0].time - Time.deltaTime * timeManager.timeScale);
 			return false;
 		}
 	}
 
 	///True if Every monster in current wave has been spawned
-	bool CurrentWaveIsOver ()
-	{
-		if (waves[0].amount == 0)
-		{
+	bool CurrentWaveIsOver () {
+		if (waves[0].amount == 0) {
 			waves.RemoveAt (0);
 			return true;
 		}
@@ -79,19 +68,16 @@ public class Spawner : MonoSingleton <Spawner>
 	}
 
 	///True if a monster is ready to be spawned
-	bool NextMonsterReady ()
-	{
+	bool NextMonsterReady () {
 		if (timeToNextMonster <= 0)
 			return true;
-		else
-		{
+		else {
 			timeToNextMonster -= Time.deltaTime * timeManager.timeScale;
 			return false;
 		}
 	}
 
-	void SpawnMonster ()
-	{
+	void SpawnMonster () {
 		Instantiate (monsterPrefab, transform.position, Quaternion.identity);
 		waves [0] = new Wave (waves [0].amount - 1, waves [0].time);
 		timeToNextMonster += spawnInterval;

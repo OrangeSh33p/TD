@@ -10,7 +10,6 @@ public class Monster : MonoBehaviour {
 	//State
 	float hp;
 	[HideInInspector] public float predictiveHP;
-
 	Vector3 origin;
 	int currentStep = 1;
 	[HideInInspector] public float distanceWalked;
@@ -23,16 +22,17 @@ public class Monster : MonoBehaviour {
 	TimeManager timeManager = TimeManager.Instance;
 
 
-	//Declarations
+	//monsterList : list of all monsters
 	static List<Transform> _monsterList;
 	public static List<Transform> monsterList {
 		get {
-			if (_monsterList==null)
+			if (_monsterList == null)
 				_monsterList = new List<Transform> ();
 			return _monsterList;
 		}
 	}
 
+	//path : list of vector3 positions the monster has to pass through
 	static List<Vector3> _path;
 	public static List<Vector3> path {
 		get {
@@ -67,18 +67,18 @@ public class Monster : MonoBehaviour {
 		distanceWalked += moveDistance;
 
 		while (moveDistance > 0) {
-			float partialMoveDistance = Mathf.Min (moveDistance, Vector3.Distance (transform.position, path [currentStep]));
+			float partialMoveDistance = Mathf.Min (moveDistance, Vector3.Distance (transform.position, path [currentStep])); //MoveDistance, or the distance to the next path step
 			moveDistance -= partialMoveDistance;
 
 			transform.LookAt (path[currentStep]);
 			transform.position += transform.forward * partialMoveDistance;
 
-			if (Vector3.Distance(transform.position, path[currentStep]) == 0)
+			if (Vector3.Distance(transform.position, path[currentStep]) <= Mathf.Epsilon)
 				currentStep ++;		
 
 			if (currentStep == path.Count)
 				Respawn();
-			moveDistance -= .0001f;
+			moveDistance -= .0001f; //Just so that we never have an infinite loop
 		}
 	}
 
@@ -89,10 +89,6 @@ public class Monster : MonoBehaviour {
 		distanceWalked = 0;
 	}
 
-	public void PredictiveDamage (float damage) {
-		predictiveHP -= damage;
-	}
-
 	public void Damage (float damage) {
 		hp -= damage;
 		hpBar.value = hp / monsterManager.maxHp;
@@ -100,9 +96,13 @@ public class Monster : MonoBehaviour {
 			Death ();
 	}
 
+	public void PredictiveDamage (float damage) {
+		predictiveHP -= damage;
+	}
+
 	void Death () {
 		goldManager.AddGold (monsterManager.reward);
-		monsterList.Remove (this.transform);
+		monsterList.Remove (transform);
 
 		if (Spawner.Instance.WavesAreOver && monsterList.Count == 0)
 			GameManager.Instance.victory = true;

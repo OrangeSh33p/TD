@@ -8,8 +8,8 @@ public class TowerShoot : MonoBehaviour {
 	[SerializeField] TargetPriority targetPriority;
 
 	//State
-	[HideInInspector] public bool purchaseInProgress = false;
 	[HideInInspector] public TowerManager.TowerType type;
+	[HideInInspector] public bool purchaseInProgress = false;
 	float remainingReloadTime;
 	public Transform target;
 

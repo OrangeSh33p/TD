@@ -22,9 +22,9 @@ public class TowerBuild : MonoBehaviour  {
 	GoldManager goldManager;
 	TowerManager towerManager = TowerManager.Instance;
 	GridManager gridManager = GridManager.Instance;
-	TowerShoot _towerShoot;
 
-	//towerShoot can return a value during compilation, even if the gameobject has not been instanciated
+	//TowerShoot : the towerShoot script of the gameObject
+	TowerShoot _towerShoot;
 	TowerShoot towerShoot  {
 		get  {
 			if (_towerShoot==null)
@@ -33,6 +33,7 @@ public class TowerBuild : MonoBehaviour  {
 		}
 	}
 
+	//TowerList : A list of all towers
 	static List<Transform> _towerList;
 	public static List<Transform> towerList  {
 		get  {
@@ -69,7 +70,6 @@ public class TowerBuild : MonoBehaviour  {
 		SnapUnderCursor ();
 	}
 
-	///
 	void ContinuePurchase () {
 		Vector2Int gridPos = SnapUnderCursor ();
 
@@ -80,12 +80,8 @@ public class TowerBuild : MonoBehaviour  {
 				else
 					StartCoroutine (goldManager.DisplayInsufficientGoldText ());
 			}
-			else {
-				if (goldManager.CanAfford (towerShoot.type.price))
-					SetMaterial (transparent);
-				else
-					SetMaterial (transparentRed);
-			}
+			else
+				SetMaterial ((goldManager.CanAfford (towerShoot.type.price)) ? transparent : transparentRed);
 		}
 		else {
 			SetMaterial(transparentRed);
