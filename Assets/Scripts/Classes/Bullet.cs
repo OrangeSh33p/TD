@@ -7,9 +7,6 @@ public class Bullet : MonoBehaviour {
 	[HideInInspector] public TowerManager.TowerType type;
 	[HideInInspector] public Transform targetTransform;
 
-	//References
-	TimeManager timeManager = TimeManager.Instance;
-
 	//Arbitrary balancing
 	float hitDistance = 1;
 
@@ -24,7 +21,8 @@ public class Bullet : MonoBehaviour {
 
 	void Move () {
 		transform.LookAt (targetTransform);
-		transform.position += transform.forward * Mathf.Min (type.bulletSpeed * Time.deltaTime * timeManager.timeScale, Vector3.Distance (transform.position, targetTransform.position));
+		transform.position += 
+			transform.forward * Mathf.Min (type.bulletSpeed * Time.deltaTime * TimeManager.timeScale, Vector3.Distance (transform.position, targetTransform.position));
 	}
 
 	///Triggers damage sequence if close enough to the target

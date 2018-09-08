@@ -11,23 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1266193940491132}
   m_IsPrefabParent: 1
---- !u!1 &1167493392650370
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4817872121315796}
-  - component: {fileID: 114249033402826568}
-  - component: {fileID: 114774799769656954}
-  m_Layer: 0
-  m_Name: Resources
-  m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1266193940491132
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4841024863103726}
   - component: {fileID: 114485674375671582}
-  - component: {fileID: 114894523036676602}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -45,19 +27,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4817872121315796
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1167493392650370}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4841024863103726}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4841024863103726
 Transform:
   m_ObjectHideFlags: 1
@@ -67,25 +36,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4817872121315796}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114249033402826568
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1167493392650370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4dc57956007fc34fb95b8e3d28d6e1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startGold: 100
-  goldText: {fileID: 0}
-  insufficientGoldText: {fileID: 0}
 --- !u!114 &114485674375671582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,32 +53,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameoverOverlay: {fileID: 0}
   victoryOverlay: {fileID: 0}
-  victory: 0
-  defeat: 0
---- !u!114 &114774799769656954
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1167493392650370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aacbca3c383099747a68fecfc2fbff53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLives: 50
+  textDisplayDuration: 1
+  goldText: {fileID: 0}
+  insufficientGoldText: {fileID: 0}
   livesText: {fileID: 0}
---- !u!114 &114894523036676602
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1266193940491132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7667c79bc985350489bb6ef93bf1e0af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  startGold: 200
+  maxLives: 10
+  cloudHolder: {fileID: 0}
+  cloudPrefabs:
+  - {fileID: 1853695215663660, guid: f9619964950ce524eae043b9ef37b679, type: 2}
+  - {fileID: 1627556281247106, guid: 1d7fb24d114369a4c82bbb4038e70afc, type: 2}
+  - {fileID: 1716423306518568, guid: cb0eff977b65bb6478491975f4b77a49, type: 2}
+  - {fileID: 1040546664859534, guid: b1437ea00ca931c408d7bd575ddea60e, type: 2}
+  - {fileID: 1743151500548542, guid: 93d39bd091fa3124ca14b9357b9d95e7, type: 2}
+  - {fileID: 1120902372308238, guid: aa4c77392242b2d41b0ad2f95969ad37, type: 2}
+  cloudSpawnPos: {x: 50, y: 20, z: 30}
+  cloudSpeed: 10
+  cloudZRandom: 20
+  cloudMinX: -50
+  cloudSpawnDelay: 1
   pauseSpeed: 0
   playSpeed: 1
   fastSpeed: 3
@@ -134,4 +81,33 @@ MonoBehaviour:
   FastButton: {fileID: 0}
   SuperFastButton: {fileID: 0}
   SuperFastImage: {fileID: 0}
-  timeScale: 0
+  towerHolder: {fileID: 0}
+  towers:
+  - prefab: {fileID: 1227333984325806, guid: 8f9b39a74c491d34889bc3652ba4e175, type: 2}
+    price: 100
+    range: 30
+    reloadingTime: 4
+    damage: 4
+    bulletSpeed: 50
+    bulletPrefab: {fileID: 1081709547453276, guid: 7c4cbc240913cd74590c50e312a8d538,
+      type: 2}
+    bulletSpawnPoint: {x: 0, y: 10, z: 0}
+    buildButton: {fileID: 0}
+    cancelButton: {fileID: 0}
+  - prefab: {fileID: 1053635697539900, guid: 47f32fa0dd28e4d4cb9943459bf562bc, type: 2}
+    price: 100
+    range: 30
+    reloadingTime: 1
+    damage: 1
+    bulletSpeed: 50
+    bulletPrefab: {fileID: 1876931515450176, guid: 7766d1a32900e9840a5ba00f40e2234a,
+      type: 2}
+    bulletSpawnPoint: {x: 0, y: 10, z: 0}
+    buildButton: {fileID: 0}
+    cancelButton: {fileID: 0}
+  monsterHolder: {fileID: 0}
+  monsters:
+  - prefab: {fileID: 1719349401281416, guid: c849d0d6810043349a40083d43a08702, type: 2}
+    speed: 5
+    maxHp: 10
+    reward: 25

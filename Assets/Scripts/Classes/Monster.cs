@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Monster : MonoBehaviour {
+	[Header("Balancing")]
+	public int typeNumber;
+
 	[Header("Boring Variables")]
 	public Slider hpBar;
 
@@ -13,14 +16,7 @@ public class Monster : MonoBehaviour {
 	Vector3 origin;
 	int currentStep = 1;
 	[HideInInspector] public float distanceWalked;
-
-
-	//References
-	GoldManager goldManager = GoldManager.Instance;
-	LivesManager livesManager = LivesManager.Instance;
-	MonsterManager monsterManager = MonsterManager.Instance;
-	TimeManager timeManager = TimeManager.Instance;
-
+	[HideInInspector] public MonsterManager.monsterType type;
 
 	//monsterList : list of all monsters
 	static List<Transform> _monsterList;
@@ -38,7 +34,7 @@ public class Monster : MonoBehaviour {
 		get {
 			if (_path == null) {
 				_path = new List<Vector3> ();
-				Transform[] tmp = MonsterManager.Instance.transform.GetChild(0).GetComponentsInChildren<Transform> ();
+				Transform[] tmp = GameManager.Instance.monsterHolder.GetChild(0).GetComponentsInChildren<Transform> ();
 
 				for (int i = 0; i < tmp.Length; i++)
 					_path.Add (tmp[i].transform.position);
@@ -49,10 +45,12 @@ public class Monster : MonoBehaviour {
 
 
 	void Start () {
-		monsterList.Add(transform);
-		transform.parent = monsterManager.transform;
+		type = MonsterManager.monsters [typeNumber];
 
-		hp = monsterManager.maxHp;
+		monsterList.Add(transform);
+		transform.parent = GameManager.Instance.monsterHolder;
+
+		hp = type.maxHp;
 		predictiveHP = hp;
 
 		origin = Spawner.Instance.transform.position;
@@ -63,7 +61,7 @@ public class Monster : MonoBehaviour {
 	}
 
 	void Move () {
-		float moveDistance = monsterManager.speed * Time.deltaTime * timeManager.timeScale; //The full distance you have to move this frame
+		float moveDistance = type.speed * Time.deltaTime * TimeManager.timeScale; //The full distance you have to move this frame
 		distanceWalked += moveDistance;
 
 		while (moveDistance > 0) {
@@ -83,7 +81,7 @@ public class Monster : MonoBehaviour {
 	}
 
 	void Respawn () {
-		livesManager.LoseLife ();
+		LivesManager.LoseLife ();
 		transform.position = origin;
 		currentStep = 1;
 		distanceWalked = 0;
@@ -91,7 +89,7 @@ public class Monster : MonoBehaviour {
 
 	public void Damage (float damage) {
 		hp -= damage;
-		hpBar.value = hp / monsterManager.maxHp;
+		hpBar.value = hp / type.maxHp;
 		if (hp <= 0)
 			Death ();
 	}
@@ -101,11 +99,11 @@ public class Monster : MonoBehaviour {
 	}
 
 	void Death () {
-		goldManager.AddGold (monsterManager.reward);
+		GoldManager.AddGold (type.reward);
 		monsterList.Remove (transform);
 
 		if (Spawner.Instance.WavesAreOver && monsterList.Count == 0)
-			GameManager.Instance.victory = true;
+			FlowManager.Victory();
 		
 		Destroy (gameObject);
 	}

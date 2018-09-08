@@ -13,9 +13,6 @@ public class Spawner : MonoSingleton <Spawner> {
 	//Arbitrary balancing
 	float spawnInterval = 1f;
 
-	//References
-	TimeManager timeManager;
-
 	//State
 	[HideInInspector] public int monstersLeftInWave;
 	float timeToNextMonster;
@@ -37,8 +34,6 @@ public class Spawner : MonoSingleton <Spawner> {
 	}
 
 	void Start () {
-		timeManager = TimeManager.Instance;
-
 		monstersLeftInWave = waves [0].amount;
 	}
 
@@ -52,7 +47,7 @@ public class Spawner : MonoSingleton <Spawner> {
 		if (waves[0].time <= 0)
 			return true;
 		else {
-			waves [0] = new Wave (waves [0].amount, waves [0].time - Time.deltaTime * timeManager.timeScale);
+			waves [0] = new Wave (waves [0].amount, waves [0].time - Time.deltaTime * TimeManager.timeScale);
 			return false;
 		}
 	}
@@ -72,7 +67,7 @@ public class Spawner : MonoSingleton <Spawner> {
 		if (timeToNextMonster <= 0)
 			return true;
 		else {
-			timeToNextMonster -= Time.deltaTime * timeManager.timeScale;
+			timeToNextMonster -= Time.deltaTime * TimeManager.timeScale;
 			return false;
 		}
 	}

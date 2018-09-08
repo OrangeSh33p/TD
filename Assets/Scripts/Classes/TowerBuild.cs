@@ -19,8 +19,6 @@ public class TowerBuild : MonoBehaviour  {
 	RaycastHit hit;
 
 	//References
-	GoldManager goldManager;
-	TowerManager towerManager = TowerManager.Instance;
 	GridManager gridManager = GridManager.Instance;
 
 	//TowerShoot : the towerShoot script of the gameObject
@@ -44,12 +42,10 @@ public class TowerBuild : MonoBehaviour  {
 	}
 
 	void Start () {
-		towerManager = TowerManager.Instance;
-		goldManager = GoldManager.Instance;
 		gridManager = GridManager.Instance;
 
 		towerList.Add (transform);
-		transform.parent = towerManager.transform;
+		transform.parent = TowerManager.th;
 
 		currentMaterial = opaque;
 	}
@@ -66,7 +62,7 @@ public class TowerBuild : MonoBehaviour  {
 	public void StartPurchase () {
 		purchaseInProgress = true;
 		towerShoot.purchaseInProgress = true;
-		towerManager.SetCancelButton (true, towerShoot.typeNumber);
+		TowerManager.SetCancelButton (true, towerShoot.typeNumber);
 		SnapUnderCursor ();
 	}
 
@@ -75,13 +71,13 @@ public class TowerBuild : MonoBehaviour  {
 
 		if (gridManager.TileIsFree(gridPos)) {
 			if (Input.GetMouseButtonUp (0)) {
-				if (goldManager.CanAfford (towerShoot.type.price))
+				if (GoldManager.CanAfford (towerShoot.type.price))
 					EndPurchase ();
 				else
-					StartCoroutine (goldManager.DisplayInsufficientGoldText ());
+					GoldManager.DisplayInsufficientGoldText ();
 			}
 			else
-				SetMaterial ((goldManager.CanAfford (towerShoot.type.price)) ? transparent : transparentRed);
+				SetMaterial ((GoldManager.CanAfford (towerShoot.type.price)) ? transparent : transparentRed);
 		}
 		else {
 			SetMaterial(transparentRed);
@@ -93,10 +89,10 @@ public class TowerBuild : MonoBehaviour  {
 	void EndPurchase () {
 		SetMaterial(opaque);
 		gridManager.SetAdjacentTiles (SnapUnderCursor(), GridManager.Tile.tower);
-		goldManager.AddGold (-towerShoot.type.price);
+		GoldManager.AddGold (-towerShoot.type.price);
 		purchaseInProgress = false;
 		towerShoot.purchaseInProgress = false;
-		towerManager.SetCancelButton (false, towerShoot.typeNumber);
+		TowerManager.SetCancelButton (false, towerShoot.typeNumber);
 		towerShoot.Reload ();
 	}
 

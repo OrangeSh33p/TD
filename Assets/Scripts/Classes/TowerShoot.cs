@@ -16,19 +16,12 @@ public class TowerShoot : MonoBehaviour {
 	//Storage
 	List<Transform> monstersInRange = new List<Transform>();
 
-	//References
-	TowerManager towerManager;
-	TimeManager timeManager;
-
 	//Declarations
 	public enum TargetPriority {First, Last, LowHP, Random};
 
 
 	void Start () {
-		towerManager = TowerManager.Instance; 
-		timeManager = TimeManager.Instance;
-
-		type = towerManager.towers [typeNumber];
+		type = TowerManager.towers [typeNumber];
 	}
 
 	void Update () {
@@ -52,6 +45,7 @@ public class TowerShoot : MonoBehaviour {
 		return (monstersInRange.Count > 0);
 	}
 
+	//Selects target depending on selected priority mode
 	void PickTarget () {
 		switch (targetPriority) {
 		case TargetPriority.First:
@@ -92,7 +86,7 @@ public class TowerShoot : MonoBehaviour {
 		if (remainingReloadTime <= 0)
 			return true;
 		else {
-			remainingReloadTime -= Time.deltaTime * timeManager.timeScale;
+			remainingReloadTime -= Time.deltaTime * TimeManager.timeScale;
 			return false;
 		}
 	}
