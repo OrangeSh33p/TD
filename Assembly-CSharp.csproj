@@ -53,11 +53,11 @@
   <ItemGroup>
      <Compile Include="Assets\Packages\Simple UI\Samples\IconPreview.cs" />
      <Compile Include="Assets\Scripts\Classes\Base.cs" />
+     <Compile Include="Assets\Scripts\Classes\Building.cs" />
      <Compile Include="Assets\Scripts\Classes\Bullet.cs" />
      <Compile Include="Assets\Scripts\Classes\Monster.cs" />
-     <Compile Include="Assets\Scripts\Classes\Spawner.cs" />
-     <Compile Include="Assets\Scripts\Classes\TowerBuild.cs" />
-     <Compile Include="Assets\Scripts\Classes\TowerShoot.cs" />
+     <Compile Include="Assets\Scripts\Classes\Tower.cs" />
+     <Compile Include="Assets\Scripts\Classes\WaveManager.cs" />
      <Compile Include="Assets\Scripts\Managers\CloudManager.cs" />
      <Compile Include="Assets\Scripts\Managers\FlowManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />

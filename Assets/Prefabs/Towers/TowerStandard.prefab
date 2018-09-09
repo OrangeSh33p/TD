@@ -101,8 +101,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4951027311309308}
-  - component: {fileID: 114478149035487116}
-  - component: {fileID: 114751106469720466}
+  - component: {fileID: 114317970286041166}
+  - component: {fileID: 114225301353888496}
   m_Layer: 0
   m_Name: TowerStandard
   m_TagString: Untagged
@@ -276,7 +276,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227333984325806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.678871, y: -0.76013273, z: -14.01}
+  m_LocalPosition: {x: -0.53, y: -0.76013273, z: -14.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4266813056333678}
@@ -489,6 +489,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1035862024381758}
   m_Mesh: {fileID: 4300054, guid: 93bd6c96c8ce9f143bfa78f09169d4e9, type: 3}
+--- !u!114 &114225301353888496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227333984325806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69cc68120f935b49a37bc74745a35d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visuals:
+  - {fileID: 1068680188177878}
+  - {fileID: 1265542851009550}
 --- !u!114 &114315709443976148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -506,7 +520,7 @@ MonoBehaviour:
   start: 0
   finish: 360
   duration: 5
---- !u!114 &114478149035487116
+--- !u!114 &114317970286041166
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -514,29 +528,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1227333984325806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 341e113e677ccd34da10a46d4e6ed913, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visuals:
-  - {fileID: 1068680188177878}
-  - {fileID: 1265542851009550}
-  transparent: {fileID: 2100000, guid: f85cca7c5ea623a4f8d0898ab3f5508e, type: 2}
-  transparentRed: {fileID: 2100000, guid: 5a4f679d8e6b52d4d90b40471a907a73, type: 2}
-  opaque: {fileID: 2100000, guid: 490eb40bf67d34e479b45febcc541c18, type: 2}
---- !u!114 &114751106469720466
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1227333984325806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68aa25a84b3a6fe40869cb3ee2afbf8e, type: 3}
+  m_Script: {fileID: 11500000, guid: a6fc8cc1cb3813b4f97c70b237c3349c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   typeNumber: 0
   targetPriority: 0
-  purchaseInProgress: 0
   type:
     prefab: {fileID: 0}
     price: 0
@@ -548,4 +544,5 @@ MonoBehaviour:
     bulletSpawnPoint: {x: 0, y: 0, z: 0}
     buildButton: {fileID: 0}
     cancelButton: {fileID: 0}
+  purchaseInProgress: 0
   target: {fileID: 0}

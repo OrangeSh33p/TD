@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Monster : MonoBehaviour {
-	[Header("Balancing")]
+	//Serialized
 	public int typeNumber;
-
-	[Header("Boring Variables")]
 	public Slider hpBar;
 
-	//State
+	//Type
+	[HideInInspector] public MonsterManager.monsterType type;
+
+	//HP
 	float hp;
 	[HideInInspector] public float predictiveHP;
-	Vector3 origin;
+
+	//Pathfinding
+	[HideInInspector] public Vector3 origin; //Position where I spawned
 	int currentStep = 1;
 	[HideInInspector] public float distanceWalked;
-	[HideInInspector] public MonsterManager.monsterType type;
 
 	//monsterList : list of all monsters
 	static List<Transform> _monsterList;
@@ -53,7 +55,7 @@ public class Monster : MonoBehaviour {
 		hp = type.maxHp;
 		predictiveHP = hp;
 
-		origin = Spawner.Instance.transform.position;
+		origin = transform.position;
 	}
 
 	void Update () {
@@ -61,11 +63,13 @@ public class Monster : MonoBehaviour {
 	}
 
 	void Move () {
-		float moveDistance = type.speed * Time.deltaTime * TimeManager.timeScale; //The full distance you have to move this frame
+		//The full distance you have to move this frame
+		float moveDistance = type.speed * Time.deltaTime * TimeManager.timeScale; 
 		distanceWalked += moveDistance;
 
 		while (moveDistance > 0) {
-			float partialMoveDistance = Mathf.Min (moveDistance, Vector3.Distance (transform.position, path [currentStep])); //MoveDistance, or the distance to the next path step
+			//Calculate either moveDistance, or the distance to the next path step
+			float partialMoveDistance = Mathf.Min (moveDistance, Vector3.Distance (transform.position, path [currentStep])); 
 			moveDistance -= partialMoveDistance;
 
 			transform.LookAt (path[currentStep]);
@@ -102,7 +106,7 @@ public class Monster : MonoBehaviour {
 		GoldManager.AddGold (type.reward);
 		monsterList.Remove (transform);
 
-		if (Spawner.Instance.WavesAreOver && monsterList.Count == 0)
+		if (WaveManager.wavesAreOver && monsterList.Count == 0)
 			FlowManager.Victory();
 		
 		Destroy (gameObject);

@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4372448694955786}
-  - component: {fileID: 114412928594297134}
-  - component: {fileID: 114078470686568654}
+  - component: {fileID: 114285561347042874}
+  - component: {fileID: 114787795765393970}
   m_Layer: 0
   m_Name: TowerFast
   m_TagString: Untagged
@@ -821,32 +821,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1838088310412890}
   m_Mesh: {fileID: 4300024, guid: 9865408b86915a4479aefda03c16d24a, type: 3}
---- !u!114 &114078470686568654
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1053635697539900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68aa25a84b3a6fe40869cb3ee2afbf8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeNumber: 1
-  targetPriority: 0
-  purchaseInProgress: 0
-  type:
-    prefab: {fileID: 0}
-    price: 0
-    range: 0
-    reloadingTime: 0
-    damage: 0
-    bulletSpeed: 0
-    bulletPrefab: {fileID: 0}
-    bulletSpawnPoint: {x: 0, y: 0, z: 0}
-    buildButton: {fileID: 0}
-    cancelButton: {fileID: 0}
-  target: {fileID: 0}
 --- !u!114 &114131502144420738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -858,8 +832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ccffd80e19c2742bf1d488ac442c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerShoot: {fileID: 114078470686568654}
---- !u!114 &114412928594297134
+  tower: {fileID: 114787795765393970}
+--- !u!114 &114285561347042874
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -867,7 +841,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1053635697539900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 341e113e677ccd34da10a46d4e6ed913, type: 3}
+  m_Script: {fileID: 11500000, guid: d69cc68120f935b49a37bc74745a35d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   visuals:
@@ -879,6 +853,29 @@ MonoBehaviour:
   - {fileID: 1287781242149420}
   - {fileID: 1189322746374394}
   - {fileID: 1928286997261156}
-  transparent: {fileID: 2100000, guid: f85cca7c5ea623a4f8d0898ab3f5508e, type: 2}
-  transparentRed: {fileID: 2100000, guid: 5a4f679d8e6b52d4d90b40471a907a73, type: 2}
-  opaque: {fileID: 2100000, guid: b0a60a3b9df75bd47a936734dc4b7401, type: 2}
+--- !u!114 &114787795765393970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1053635697539900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fc8cc1cb3813b4f97c70b237c3349c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeNumber: 1
+  targetPriority: 0
+  type:
+    prefab: {fileID: 0}
+    price: 0
+    range: 0
+    reloadingTime: 0
+    damage: 0
+    bulletSpeed: 0
+    bulletPrefab: {fileID: 0}
+    bulletSpawnPoint: {x: 0, y: 0, z: 0}
+    buildButton: {fileID: 0}
+    cancelButton: {fileID: 0}
+  purchaseInProgress: 0
+  target: {fileID: 0}

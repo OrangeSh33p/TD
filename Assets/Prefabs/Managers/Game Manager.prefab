@@ -51,36 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714095ae92f84eb48840cb7a00bd92e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameoverOverlay: {fileID: 0}
-  victoryOverlay: {fileID: 0}
-  textDisplayDuration: 1
-  goldText: {fileID: 0}
-  insufficientGoldText: {fileID: 0}
-  livesText: {fileID: 0}
   startGold: 200
   maxLives: 10
-  cloudHolder: {fileID: 0}
-  cloudPrefabs:
-  - {fileID: 1853695215663660, guid: f9619964950ce524eae043b9ef37b679, type: 2}
-  - {fileID: 1627556281247106, guid: 1d7fb24d114369a4c82bbb4038e70afc, type: 2}
-  - {fileID: 1716423306518568, guid: cb0eff977b65bb6478491975f4b77a49, type: 2}
-  - {fileID: 1040546664859534, guid: b1437ea00ca931c408d7bd575ddea60e, type: 2}
-  - {fileID: 1743151500548542, guid: 93d39bd091fa3124ca14b9357b9d95e7, type: 2}
-  - {fileID: 1120902372308238, guid: aa4c77392242b2d41b0ad2f95969ad37, type: 2}
-  cloudSpawnPos: {x: 50, y: 20, z: 30}
-  cloudSpeed: 10
-  cloudZRandom: 20
-  cloudMinX: -50
-  cloudSpawnDelay: 1
-  pauseSpeed: 0
-  playSpeed: 1
-  fastSpeed: 3
-  superFastSpeed: 10
-  PauseButton: {fileID: 0}
-  PlayButton: {fileID: 0}
-  FastButton: {fileID: 0}
-  SuperFastButton: {fileID: 0}
-  SuperFastImage: {fileID: 0}
   towerHolder: {fileID: 0}
   towers:
   - prefab: {fileID: 1227333984325806, guid: 8f9b39a74c491d34889bc3652ba4e175, type: 2}
@@ -105,9 +77,63 @@ MonoBehaviour:
     bulletSpawnPoint: {x: 0, y: 10, z: 0}
     buildButton: {fileID: 0}
     cancelButton: {fileID: 0}
+  transparent: {fileID: 2100000, guid: f85cca7c5ea623a4f8d0898ab3f5508e, type: 2}
+  transparentRed: {fileID: 2100000, guid: 5a4f679d8e6b52d4d90b40471a907a73, type: 2}
+  opaque: {fileID: 2100000, guid: 490eb40bf67d34e479b45febcc541c18, type: 2}
   monsterHolder: {fileID: 0}
   monsters:
   - prefab: {fileID: 1719349401281416, guid: c849d0d6810043349a40083d43a08702, type: 2}
     speed: 5
     maxHp: 10
     reward: 25
+  - prefab: {fileID: 1185991961315326, guid: 71d47728675b03947bc9b90ca128f7b2, type: 2}
+    speed: 20
+    maxHp: 10
+    reward: 50
+  timeBeforeFirstWave: 1
+  timeBetweenWaves: 5
+  timeBetweenMonsters: 1
+  waves:
+  - subWaves:
+    - type: 0
+      amount: 1
+  - subWaves:
+    - type: 1
+      amount: 1
+  - subWaves:
+    - type: 0
+      amount: 3
+  - subWaves:
+    - type: 1
+      amount: 2
+  - subWaves:
+    - type: 0
+      amount: 5
+  pauseSpeed: 0
+  playSpeed: 1
+  fastSpeed: 3
+  superFastSpeed: 10
+  PauseButton: {fileID: 0}
+  PlayButton: {fileID: 0}
+  FastButton: {fileID: 0}
+  SuperFastButton: {fileID: 0}
+  SuperFastImage: {fileID: 0}
+  gameoverOverlay: {fileID: 0}
+  victoryOverlay: {fileID: 0}
+  textDisplayDuration: 1
+  goldText: {fileID: 0}
+  insufficientGoldText: {fileID: 0}
+  livesText: {fileID: 0}
+  cloudHolder: {fileID: 0}
+  cloudPrefabs:
+  - {fileID: 1853695215663660, guid: f9619964950ce524eae043b9ef37b679, type: 2}
+  - {fileID: 1627556281247106, guid: 1d7fb24d114369a4c82bbb4038e70afc, type: 2}
+  - {fileID: 1716423306518568, guid: cb0eff977b65bb6478491975f4b77a49, type: 2}
+  - {fileID: 1040546664859534, guid: b1437ea00ca931c408d7bd575ddea60e, type: 2}
+  - {fileID: 1743151500548542, guid: 93d39bd091fa3124ca14b9357b9d95e7, type: 2}
+  - {fileID: 1120902372308238, guid: aa4c77392242b2d41b0ad2f95969ad37, type: 2}
+  cloudSpawnPos: {x: 50, y: 20, z: 30}
+  cloudSpeed: 10
+  cloudZRandom: 20
+  cloudMinX: -50
+  cloudSpawnDelay: 1

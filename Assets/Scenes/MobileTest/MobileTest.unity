@@ -3439,18 +3439,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - time: 0
-    amount: 2
+    subWaves: []
   - time: 5
-    amount: 4
+    subWaves: []
   - time: 5
-    amount: 6
+    subWaves: []
   - time: 5
-    amount: 8
+    subWaves: []
   - time: 5
-    amount: 10
-  monsterPrefab: {fileID: 1719349401281416, guid: c849d0d6810043349a40083d43a08702,
-    type: 2}
-  monstersLeftInWave: 0
+    subWaves: []
 --- !u!1 &451435085
 GameObject:
   m_ObjectHideFlags: 0
@@ -8842,6 +8839,21 @@ Prefab:
       propertyPath: monsterHolder
       value: 
       objectReference: {fileID: 1373980603}
+    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
+        type: 2}
+      propertyPath: transparent
+      value: 
+      objectReference: {fileID: 2100000, guid: f85cca7c5ea623a4f8d0898ab3f5508e, type: 2}
+    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
+        type: 2}
+      propertyPath: transparentRed
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a4f679d8e6b52d4d90b40471a907a73, type: 2}
+    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
+        type: 2}
+      propertyPath: opaque
+      value: 
+      objectReference: {fileID: 2100000, guid: 490eb40bf67d34e479b45febcc541c18, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 572e7ca0d19c77e4ca747e05dbeab48c, type: 2}
   m_IsPrefabParent: 0

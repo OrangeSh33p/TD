@@ -51,7 +51,7 @@ public static class FlowManager {
 
 	static void RestartScene () {
 		Monster.monsterList.Clear ();
-		TowerBuild.towerList.Clear ();
+		Building.towerList.Clear ();
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 }
