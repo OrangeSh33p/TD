@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public static class WaveManager {
 	//Reference to GameManager
@@ -10,6 +10,8 @@ public static class WaveManager {
 	//Timers
 	static float timeToNextMonster;
 	static float timeToNextWave;
+	static bool waitingForNextWave = true;
+	static int waveNb = 1;
 
 	//Checks wether every wave has been spawned
 	public static bool wavesAreOver {
@@ -50,22 +52,18 @@ public static class WaveManager {
 
 	///True if a wave is currently being spawned
 	static bool NextWaveReady () {
-		if (timeToNextWave <= 0)
-			return true;
-		else {
-			timeToNextWave -= Time.deltaTime * TimeManager.timeScale;
-			return false;
-		}
+		timeToNextWave -= Time.deltaTime * TimeManager.timeScale;
+		if (timeToNextWave <= 1 && waitingForNextWave)
+			DisplayWaveMessage (true);
+		if (timeToNextWave <= 0 && waitingForNextWave)
+			DisplayWaveMessage (false);
+		return (timeToNextWave <= 0);
 	}
 
 	///True if a monster is ready to be spawned
 	static bool NextMonsterReady () {
-		if (timeToNextMonster <= 0)
-			return true;
-		else {
-			timeToNextMonster -= Time.deltaTime * TimeManager.timeScale;
-			return false;
-		}
+		timeToNextMonster -= Time.deltaTime * TimeManager.timeScale;
+		return (timeToNextMonster <= 0);
 	}
 
 	static void SpawnMonster () {
@@ -82,9 +80,16 @@ public static class WaveManager {
 
 		if (waves[0].subWaves.Count == 0) {//Delete first wave if it is empty
 			waves.RemoveAt (0);
+			waitingForNextWave = true;
 			timeToNextWave = gm.timeBetweenWaves;
+			waveNb ++;
 		}
 		
 		timeToNextMonster += gm.timeBetweenMonsters;
+	}
+
+	static void DisplayWaveMessage (bool mode) {
+		gm.waveMessage.GetComponent<Text>().text = "Wave " + waveNb;
+		gm.waveMessage.SetActive(mode);
 	}
 }

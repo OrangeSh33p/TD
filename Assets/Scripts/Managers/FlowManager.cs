@@ -26,12 +26,13 @@ public static class FlowManager {
 				gm.victoryOverlay.SetActive (true);
 			if (state == gameState.DEFEAT)
 				gm.gameoverOverlay.SetActive (true);
+			waiting = false;
 		}
 
 		//Count time left before reloading scene
 		if (timeToSceneChange > 0)
 			timeToSceneChange -= Time.deltaTime * TimeManager.timeScale;
-		if (waiting && timeToSceneChange <= 0)
+		if (timeToSceneChange < 0)
 			RestartScene ();
 	}
 

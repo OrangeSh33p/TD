@@ -29,6 +29,7 @@ public class GameManager : MonoSingleton<GameManager> {
 
 	[Header("SPAWNER")]
 	public Transform spawner;
+	public GameObject waveMessage;
 	public float timeBeforeFirstWave;
 	public float timeBetweenWaves; //How long to wait between the last monster of a wave and the first monster of the next one
 	public float timeBetweenMonsters;
