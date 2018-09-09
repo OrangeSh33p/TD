@@ -2,55 +2,72 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class GameManager : MonoSingleton<GameManager> 
-{
-	[Header("Boring Variables")]
-	[SerializeField] GameObject gameoverOverlay;
-	[SerializeField] GameObject victoryOverlay;
+public class GameManager : MonoSingleton<GameManager> {
+	[Header("END GAME")]
+	public GameObject gameoverOverlay;
+	public GameObject victoryOverlay;
 
-	//State
-	[HideInInspector] public bool victory;
-	[HideInInspector] public bool defeat;
+	[Header("TEXT DISPLAYS")]
+	public float textDisplayDuration;
+	public Text goldText;
+	public GameObject insufficientGoldText;
+	public Text livesText;
 
-	void Update ()
-	{
-		if (victory)
-		{
-			StartCoroutine (Victory ());
-			victory = false;
-		}
-		if (defeat)
-		{
-			StartCoroutine (GameOver ());
-			defeat = false;
-		}
+	[Header("GOLD")]
+	public int startGold;
+
+	[Header("LIVES")]
+	public int maxLives;
+
+	[Header ("CLOUDS")]
+	public Transform cloudHolder;
+	public List<GameObject> cloudPrefabs;
+	public Vector3 cloudSpawnPos;
+	public int cloudSpeed;
+	public int cloudZRandom;
+	public int cloudMinX;
+	public int cloudSpawnDelay;
+
+	[Header("TIME")]
+	public float pauseSpeed;
+	public float playSpeed;
+	public float fastSpeed;
+	public float superFastSpeed;
+	public Button PauseButton;
+	public Button PlayButton;
+	public Button FastButton;
+	public Button SuperFastButton;
+	public Image SuperFastImage;
+
+	[Header("TOWERS")]
+	public Transform towerHolder;
+	public List<TowerManager.TowerType> towers;
+
+	[Header ("MONSTER")]
+	public Transform monsterHolder;
+	public List<MonsterManager.monsterType> monsters;
+
+	void Start () {
+		GoldManager._Start();
+		LivesManager._Start();
+		TimeManager._Start();
+		TowerManager._Start();
 	}
 
-	//Why is all dark when restart ?
-	//Called by LivesManager when last life is lost
-	public IEnumerator GameOver ()
-	{
-		yield return new WaitForSeconds (1);
-		gameoverOverlay.SetActive (true);
-		yield return new WaitForSeconds (3);
-		RestartScene ();
+	void Update ()	{
+		GoldManager._Update();
+		CloudManager._Update();
+		TimeManager._Update();
+		FlowManager._Update();
 	}
 
-	//Why no trigger ?
-	//Called from each monster when it dies
-	public IEnumerator Victory ()
-	{
-		yield return new WaitForSeconds (1);
-		victoryOverlay.SetActive (true);
-		yield return new WaitForSeconds (3);
-		RestartScene ();
+	public GameObject _Instantiate (GameObject original, Vector3 position, Quaternion rotation, Transform parent) {
+		return Instantiate(original, position, rotation, parent);
 	}
 
-	void RestartScene ()
-	{
-		Monster.monsterList.Clear ();
-		TowerBuild.towerList.Clear ();
-		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+	public void _Destroy (GameObject target) {
+		Destroy (target);
 	}
 }

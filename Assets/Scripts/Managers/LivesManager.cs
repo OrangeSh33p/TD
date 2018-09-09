@@ -2,36 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class LivesManager : MonoSingleton<LivesManager> 
-{
-	[Header("Balancing")]
-	[SerializeField] int maxLives;
-
-	[Header("Boring Variables")]
-	[SerializeField] Text livesText;
+public static class LivesManager {
+	//Reference to GameManager
+	static GameManager gm = GameManager.Instance;
 
 	//State
-	int lives;
+	static int lives;
 
-	void Start ()
-	{
-		lives = maxLives;
+	public static void _Start () {
+		lives = gm.maxLives;
 		PrintLives ();
 	}
 
-	public void LoseLife ()
-	{
+	public static void LoseLife () {
 		lives--;
 		if (lives == 0)
-			GameManager.Instance.defeat = true;
+			FlowManager.GameOver();
 		PrintLives ();
 	}
 
-	void PrintLives ()
-	{
-		livesText.text = "x " + lives;
+	static void PrintLives () {
+		gm.livesText.text = "x " + lives;
 	}
-
 }

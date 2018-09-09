@@ -2,39 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CloudManager : MonoBehaviour {
-	[Header ("Boring Variables")]
-	[SerializeField] List<GameObject> clouds;
-	[SerializeField] Vector3 spawnPos;
-	[SerializeField] int speed;
-	[SerializeField] int zRandom;
-	[SerializeField] int minX;
-	[SerializeField] int spawnDelay;
-	float timeLeft;
+public static class CloudManager {
+	//Reference to GameManager
+	static GameManager gm = GameManager.Instance;
+	static Transform ch = gm.cloudHolder;
 
-	void Update () {
+	static float timeLeft;
+
+	public static void _Update () {
 		MoveCloud ();
-		if (timeLeft < 0)
-		{
+		if (timeLeft < 0) {
 			SpawnCloud ();
-			timeLeft = spawnDelay;
+			timeLeft = gm.cloudSpawnDelay;
 		} else
-			timeLeft -= Time.deltaTime * TimeManager.Instance.timeScale;
+			timeLeft -= Time.deltaTime * TimeManager.timeScale;
 	}
 
-	void SpawnCloud () {
-		float zOffset = Random.Range (0, zRandom);
-		Instantiate (clouds [Random.Range (0, clouds.Count - 1)], spawnPos + new Vector3 (0, 0, zOffset), Quaternion.identity, transform);
+	static void SpawnCloud () {
+		float zOffset = Random.Range (0, gm.cloudZRandom);
+		gm._Instantiate (gm.cloudPrefabs [Random.Range (0, gm.cloudPrefabs.Count - 1)], gm.cloudSpawnPos + new Vector3 (0, 0, zOffset), Quaternion.identity, ch.transform);
 	}
 
-	void MoveCloud () {
-		foreach (Transform cloud in transform.GetComponentsInChildren<Transform>()) {
-			if (cloud != transform) 	{
-				cloud.position += Time.deltaTime * speed * TimeManager.Instance.timeScale * new Vector3 (-1, 0, 0);
-				if (cloud.position.x < minX)
-					Destroy (cloud.gameObject);
+	static void MoveCloud () {
+		foreach (Transform cloud in ch.GetComponentsInChildren<Transform>()) {
+			if (cloud != ch) 	{
+				cloud.position += Time.deltaTime * gm.cloudSpeed * TimeManager.timeScale * new Vector3 (-1, 0, 0);
+				if (cloud.position.x < gm.cloudMinX)
+					gm._Destroy (cloud.gameObject);
 			}
 		}
 	}
-
 }

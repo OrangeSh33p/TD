@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4506968094709252}
-  - component: {fileID: 114156742010766602}
   m_Layer: 0
   m_Name: TowerManager
   m_TagString: Untagged
@@ -40,37 +39,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114156742010766602
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1405905086358462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b378e7551ae22141b4d09e1ccb9da01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towers:
-  - prefab: {fileID: 1227333984325806, guid: 8f9b39a74c491d34889bc3652ba4e175, type: 2}
-    price: 100
-    range: 20
-    reloadingTime: 2
-    damage: 4
-    bulletSpeed: 50
-    bulletPrefab: {fileID: 1081709547453276, guid: 7c4cbc240913cd74590c50e312a8d538,
-      type: 2}
-    bulletSpawnPoint: {x: 0, y: 13, z: 0}
-    buildButton: {fileID: 0}
-    cancelButton: {fileID: 0}
-  - prefab: {fileID: 1053635697539900, guid: 47f32fa0dd28e4d4cb9943459bf562bc, type: 2}
-    price: 100
-    range: 20
-    reloadingTime: 0.5
-    damage: 1
-    bulletSpeed: 50
-    bulletPrefab: {fileID: 1876931515450176, guid: 7766d1a32900e9840a5ba00f40e2234a,
-      type: 2}
-    bulletSpawnPoint: {x: 0, y: 13, z: 0}
-    buildButton: {fileID: 0}
-    cancelButton: {fileID: 0}

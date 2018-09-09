@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Classes\TowerBuild.cs" />
      <Compile Include="Assets\Scripts\Classes\TowerShoot.cs" />
      <Compile Include="Assets\Scripts\Managers\CloudManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\FlowManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GoldManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GridManager.cs" />

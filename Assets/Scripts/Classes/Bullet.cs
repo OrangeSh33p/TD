@@ -2,38 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour 
-{
+public class Bullet : MonoBehaviour {
 	//State
-	[HideInInspector] public Transform targetTransform;
 	[HideInInspector] public TowerManager.TowerType type;
+	[HideInInspector] public Transform targetTransform;
 
-	//References
-	//TowerManager towerManager = TowerManager.Instance;
-	TimeManager timeManager = TimeManager.Instance;
+	//Arbitrary balancing
+	float hitDistance = 1;
 
-	void Update () 
-	{
+	void Update ()  {
 		if (targetTransform == null)
 			Destroy (gameObject);
-		else
-		{
+		else {
 			Move ();
 			CheckIfTargetReached ();
 		}
 	}
 
-	void Move ()
-	{
+	void Move () {
 		transform.LookAt (targetTransform);
-		transform.position += transform.forward * Mathf.Min (type.bulletSpeed * Time.deltaTime * timeManager.timeScale, Vector3.Distance (transform.position, targetTransform.position));
+		transform.position += 
+			transform.forward * Mathf.Min (type.bulletSpeed * Time.deltaTime * TimeManager.timeScale, Vector3.Distance (transform.position, targetTransform.position));
 	}
 
 	///Triggers damage sequence if close enough to the target
-	void CheckIfTargetReached ()
-	{
-		if (Vector3.Distance(transform.position, targetTransform.position) < 1)
-		{
+	void CheckIfTargetReached () {
+		if (Vector3.Distance(transform.position, targetTransform.position) < hitDistance) {
 			targetTransform.GetComponent<Monster> ().Damage (type.damage);
 			Destroy (gameObject);		
 		}	

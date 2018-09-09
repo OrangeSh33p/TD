@@ -27,7 +27,7 @@ public class Rotate : MonoBehaviour
 		if (z)
 			transform.rotation = Quaternion.Euler (new Vector3 (transform.rotation.x, transform.rotation.y, value));
 
-		timeTillRestart -= Time.deltaTime * TimeManager.Instance.timeScale;
+		timeTillRestart -= Time.deltaTime * TimeManager.timeScale;
 		if (timeTillRestart <= 0)
 		{
 			Tweens.Linear(start, finish, duration, (float f) => {value = f;});
