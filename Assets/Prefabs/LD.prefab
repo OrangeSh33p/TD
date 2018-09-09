@@ -221,7 +221,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4502831317505918}
-  - component: {fileID: 114159542862211824}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -12320,38 +12319,6 @@ MonoBehaviour:
   start: 0
   finish: 360
   duration: 10
---- !u!114 &114159542862211824
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1091002915077942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a096b3500fc8fa4ca6567c7f3c241f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waves:
-  - time: 1
-    subWaves:
-    - type: 0
-      amount: 1
-  - time: 5
-    subWaves:
-    - type: 1
-      amount: 1
-  - time: 5
-    subWaves:
-    - type: 0
-      amount: 3
-  - time: 5
-    subWaves:
-    - type: 1
-      amount: 3
-  - time: 5
-    subWaves:
-    - type: 0
-      amount: 5
 --- !u!114 &114228482626677926
 MonoBehaviour:
   m_ObjectHideFlags: 1

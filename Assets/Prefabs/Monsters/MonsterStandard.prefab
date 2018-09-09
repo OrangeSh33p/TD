@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 4255509085815054}
   - component: {fileID: 114192315366241166}
   m_Layer: 0
-  m_Name: Monster
+  m_Name: MonsterStandard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -664,8 +664,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca56ead43223d049bc9c764c503ac5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeNumber: 0
   hpBar: {fileID: 114097643947048186}
+  type:
+    prefab: {fileID: 0}
+    speed: 0
+    maxHp: 0
+    reward: 0
   predictiveHP: 0
+  origin: {x: 0, y: 0, z: 0}
+  distanceWalked: 0
 --- !u!114 &114275093336559832
 MonoBehaviour:
   m_ObjectHideFlags: 1
