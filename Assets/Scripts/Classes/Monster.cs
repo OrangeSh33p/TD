@@ -16,9 +16,9 @@ public class Monster : MonoBehaviour {
 	[HideInInspector] public float predictiveHP;
 
 	//Pathfinding
-	[HideInInspector] public Vector3 origin; //Position where I spawned
-	int currentStep = 1;
+	[HideInInspector] public Transform origin; //My spawner
 	[HideInInspector] public float distanceWalked;
+	int currentStep = 1;
 
 	//monsterList : list of all monsters
 	static List<Transform> _monsterList;
@@ -30,7 +30,8 @@ public class Monster : MonoBehaviour {
 		}
 	}
 
-	//path : list of vector3 positions the monster has to pass through
+	List<Vector3> path;
+	/*//path : list of vector3 positions the monster has to pass through
 	static List<Vector3> _path;
 	public static List<Vector3> path {
 		get {
@@ -43,7 +44,7 @@ public class Monster : MonoBehaviour {
 			}
 			return _path;
 		}
-	}
+	}*/
 
 
 	void Start () {
@@ -55,7 +56,10 @@ public class Monster : MonoBehaviour {
 		hp = type.maxHp;
 		predictiveHP = hp;
 
-		origin = transform.position;
+		path = new List<Vector3> ();
+		Transform[] spawnKids = origin.GetChild (0).GetComponentsInChildren<Transform> ();
+		for (int i = 1; i < spawnKids.Length; i++)
+			path.Add (spawnKids [i].position);
 	}
 
 	void Update () {
@@ -86,7 +90,7 @@ public class Monster : MonoBehaviour {
 
 	void Respawn () {
 		LivesManager.LoseLife ();
-		transform.position = origin;
+		transform.position = path[0];
 		currentStep = 1;
 		distanceWalked = 0;
 	}

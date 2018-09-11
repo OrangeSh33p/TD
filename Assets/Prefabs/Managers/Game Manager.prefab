@@ -90,7 +90,13 @@ MonoBehaviour:
     speed: 30
     maxHp: 10
     reward: 25
-  spawner: {fileID: 0}
+  - prefab: {fileID: 1638486666199052, guid: 3be61406c6e1e214aba4f6cad1c3f785, type: 2}
+    speed: 5
+    maxHp: 50
+    reward: 100
+  spawners:
+  - {fileID: 0}
+  waveMessage: {fileID: 0}
   timeBeforeFirstWave: 2
   timeBetweenWaves: 10
   timeBetweenMonsters: 1
@@ -98,20 +104,30 @@ MonoBehaviour:
   - subWaves:
     - type: 0
       amount: 2
+      spawner: 0
   - subWaves:
     - type: 0
       amount: 3
+      spawner: 0
   - subWaves:
     - type: 1
       amount: 1
+      spawner: 0
   - subWaves:
     - type: 1
       amount: 2
+      spawner: 0
   - subWaves:
     - type: 0
       amount: 4
+      spawner: 0
     - type: 1
       amount: 2
+      spawner: 0
+  - subWaves:
+    - type: 2
+      amount: 1
+      spawner: 0
   pauseSpeed: 0
   playSpeed: 1
   fastSpeed: 3
