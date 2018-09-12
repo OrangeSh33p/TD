@@ -355,6 +355,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
+        type: 2}
+      propertyPath: waves.Array.data[0].subWaves.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4841024863103726, guid: 572e7ca0d19c77e4ca747e05dbeab48c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -487,6 +492,16 @@ Prefab:
       propertyPath: cloudHolders.Array.data[1]
       value: 
       objectReference: {fileID: 1970880251}
+    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
+        type: 2}
+      propertyPath: waves.Array.data[0].subWaves.Array.data[1].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
+        type: 2}
+      propertyPath: waves.Array.data[0].subWaves.Array.data[1].type
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 572e7ca0d19c77e4ca747e05dbeab48c, type: 2}
   m_IsPrefabParent: 0

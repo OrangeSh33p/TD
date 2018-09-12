@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 4259523087873162}
   - component: {fileID: 33943290096401452}
   - component: {fileID: 23844079340560550}
+  - component: {fileID: 95526556098943216}
   m_Layer: 0
   m_Name: water_ch1
   m_TagString: Untagged
@@ -576,6 +577,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1316098249853554}
   m_Mesh: {fileID: 4300010, guid: 9db1d959576d81642a543214be6067f6, type: 3}
+--- !u!95 &95526556098943216
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1316098249853554}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6661a990ca74106409140f2e7a4a3005, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114177765537649494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -698,7 +716,7 @@ MonoBehaviour:
     maxHp: 0
     reward: 0
   predictiveHP: 0
-  origin: {x: 0, y: 0, z: 0}
+  origin: {fileID: 0}
   distanceWalked: 0
 --- !u!114 &114916671395744048
 MonoBehaviour:

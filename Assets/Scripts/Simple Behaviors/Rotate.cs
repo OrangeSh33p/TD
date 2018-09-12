@@ -52,8 +52,8 @@ public class Rotate : MonoBehaviour
 				value += amplitude * direction;
 			}
 
-		if (x) transform.rotation = Quaternion.Euler (new Vector3 (value, transform.rotation.y, transform.rotation.z));
-		if (y) transform.rotation = Quaternion.Euler (new Vector3 (transform.rotation.x, value, transform.rotation.z));
-		if (z) transform.rotation = Quaternion.Euler (new Vector3 (transform.rotation.x, transform.rotation.y, value));
+		if (x) transform.localRotation = Quaternion.Euler (new Vector3 (value, transform.localRotation.y, transform.localRotation.z));
+		if (y) transform.localRotation = Quaternion.Euler (new Vector3 (transform.localRotation.x, value, transform.localRotation.z));
+		if (z) transform.localRotation = Quaternion.Euler (new Vector3 (transform.localRotation.x, transform.localRotation.y, value));
 	}
 }
