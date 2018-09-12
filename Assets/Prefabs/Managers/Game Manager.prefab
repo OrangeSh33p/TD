@@ -107,7 +107,7 @@ MonoBehaviour:
       spawner: 0
   - subWaves:
     - type: 0
-      amount: 3
+      amount: 4
       spawner: 0
   - subWaves:
     - type: 1
@@ -143,7 +143,12 @@ MonoBehaviour:
   goldText: {fileID: 0}
   insufficientGoldText: {fileID: 0}
   livesText: {fileID: 0}
-  cloudHolder: {fileID: 0}
+  cloudHolders:
+  - {fileID: 0}
+  - {fileID: 0}
+  cloudSpeed:
+  - 1
+  - 2
   cloudPrefabs:
   - {fileID: 1853695215663660, guid: f9619964950ce524eae043b9ef37b679, type: 2}
   - {fileID: 1627556281247106, guid: 1d7fb24d114369a4c82bbb4038e70afc, type: 2}
@@ -152,7 +157,6 @@ MonoBehaviour:
   - {fileID: 1743151500548542, guid: 93d39bd091fa3124ca14b9357b9d95e7, type: 2}
   - {fileID: 1120902372308238, guid: aa4c77392242b2d41b0ad2f95969ad37, type: 2}
   cloudSpawnPos: {x: 50, y: 20, z: 30}
-  cloudSpeed: 10
   cloudZRandom: 20
   cloudMinX: -50
-  cloudSpawnDelay: 1
+  cloudSpawnDelay: 30

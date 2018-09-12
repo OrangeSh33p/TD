@@ -61,10 +61,10 @@ public class GameManager : MonoSingleton<GameManager> {
 
 	[Space(10)]
 	[Header ("CLOUDS")]
-	public Transform cloudHolder;
+	public List<Transform> cloudHolders;
+	public List<float> cloudSpeed;
 	public List<GameObject> cloudPrefabs;
 	public Vector3 cloudSpawnPos;
-	public int cloudSpeed;
 	public int cloudZRandom;
 	public int cloudMinX;
 	public int cloudSpawnDelay;
