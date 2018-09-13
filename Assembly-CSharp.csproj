@@ -70,9 +70,9 @@
      <Compile Include="Assets\Scripts\Other\MonoSingleton.cs" />
      <Compile Include="Assets\Scripts\Other\Tweens.cs" />
      <Compile Include="Assets\Scripts\Simple Behaviors\FixedRotation.cs" />
+     <Compile Include="Assets\Scripts\Simple Behaviors\HpBar.cs" />
      <Compile Include="Assets\Scripts\Simple Behaviors\Rotate.cs" />
      <Compile Include="Assets\Scripts\Simple Behaviors\RotateTowardsTarget.cs" />
-     <Compile Include="Assets\transparent.cs" />
      <None Include="Assets\Packages\Simple UI\Fonts\OFL.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
