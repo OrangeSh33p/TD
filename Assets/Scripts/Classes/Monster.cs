@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Monster : MonoBehaviour {
 	//Serialized
 	public int typeNumber;
-	public Slider hpBar;
+	public HpBar hpBar;
 
 	//Type
 	[HideInInspector] public MonsterManager.monsterType type;
@@ -16,9 +16,9 @@ public class Monster : MonoBehaviour {
 	[HideInInspector] public float predictiveHP;
 
 	//Pathfinding
-	[HideInInspector] public Vector3 origin; //Position where I spawned
-	int currentStep = 1;
+	[HideInInspector] public Transform origin;
 	[HideInInspector] public float distanceWalked;
+	int currentStep = 1;
 
 	//monsterList : list of all monsters
 	static List<Transform> _monsterList;
@@ -31,20 +31,7 @@ public class Monster : MonoBehaviour {
 	}
 
 	//path : list of vector3 positions the monster has to pass through
-	static List<Vector3> _path;
-	public static List<Vector3> path {
-		get {
-			if (_path == null) {
-				_path = new List<Vector3> ();
-				Transform[] tmp = GameManager.Instance.monsterHolder.GetChild(0).GetComponentsInChildren<Transform> ();
-
-				for (int i = 0; i < tmp.Length; i++)
-					_path.Add (tmp[i].transform.position);
-			}
-			return _path;
-		}
-	}
-
+	List<Vector3> path;
 
 	void Start () {
 		type = MonsterManager.monsters [typeNumber];
@@ -53,9 +40,13 @@ public class Monster : MonoBehaviour {
 		transform.parent = GameManager.Instance.monsterHolder;
 
 		hp = type.maxHp;
+		hpBar.maxHP = type.maxHp;
 		predictiveHP = hp;
 
-		origin = transform.position;
+		path = new List<Vector3> ();
+		Transform[] spawnKids = origin.GetChild (0).GetComponentsInChildren<Transform> ();
+		for (int i = 1; i < spawnKids.Length; i++)
+			path.Add (spawnKids [i].position);
 	}
 
 	void Update () {
@@ -72,8 +63,9 @@ public class Monster : MonoBehaviour {
 			float partialMoveDistance = Mathf.Min (moveDistance, Vector3.Distance (transform.position, path [currentStep])); 
 			moveDistance -= partialMoveDistance;
 
-			transform.LookAt (path[currentStep]);
-			transform.position += transform.forward * partialMoveDistance;
+			transform.LookAt(path[currentStep]);
+			
+			transform.position += Vector3.Normalize(path[currentStep]-transform.position) * partialMoveDistance;
 
 			if (Vector3.Distance(transform.position, path[currentStep]) <= Mathf.Epsilon)
 				currentStep ++;		
@@ -86,14 +78,14 @@ public class Monster : MonoBehaviour {
 
 	void Respawn () {
 		LivesManager.LoseLife ();
-		transform.position = origin;
+		transform.position = path[0];
 		currentStep = 1;
 		distanceWalked = 0;
 	}
 
 	public void Damage (float damage) {
 		hp -= damage;
-		hpBar.value = hp / type.maxHp;
+		hpBar.setHP(hp);
 		if (hp <= 0)
 			Death ();
 	}

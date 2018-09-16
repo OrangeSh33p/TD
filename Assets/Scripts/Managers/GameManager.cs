@@ -28,7 +28,7 @@ public class GameManager : MonoSingleton<GameManager> {
 	public List<MonsterManager.monsterType> monsters;
 
 	[Header("SPAWNER")]
-	public Transform spawner;
+	public List<Transform> spawners;
 	public GameObject waveMessage;
 	public float timeBeforeFirstWave;
 	public float timeBetweenWaves; //How long to wait between the last monster of a wave and the first monster of the next one
@@ -61,10 +61,10 @@ public class GameManager : MonoSingleton<GameManager> {
 
 	[Space(10)]
 	[Header ("CLOUDS")]
-	public Transform cloudHolder;
+	public List<Transform> cloudHolders;
+	public List<float> cloudSpeed;
 	public List<GameObject> cloudPrefabs;
 	public Vector3 cloudSpawnPos;
-	public int cloudSpeed;
 	public int cloudZRandom;
 	public int cloudMinX;
 	public int cloudSpawnDelay;

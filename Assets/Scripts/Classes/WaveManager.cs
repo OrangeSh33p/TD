@@ -29,13 +29,15 @@ public static class WaveManager {
 		}
 	}
 
-	//Subwave : a subset of a wave, containing only monsters of the same type
+	//Subwave : a subset of a wave, containing only monsters of the same type, spawning from the same place
 	[System.Serializable] public struct SubWave {
 		public int type;
 		public int amount;
-		public SubWave (int type, int amount) {
+		public int spawner;
+		public SubWave (int type, int amount, int spawner) {
 			this.type = type;
 			this.amount = amount;
+			this.spawner = spawner;
 		}
 	}
 
@@ -67,13 +69,16 @@ public static class WaveManager {
 	}
 
 	static void SpawnMonster () {
-		gm._Instantiate (gm.monsters[waves[0].subWaves[0].type].prefab, gm.spawner.position, Quaternion.identity, gm.monsterHolder);
+		SubWave sw = waves [0].subWaves[0];
+		GameObject mon = gm._Instantiate (gm.monsters[sw.type].prefab, gm.spawners[sw.spawner].position, Quaternion.identity, gm.monsterHolder);
+		mon.GetComponent<Monster> ().origin = gm.spawners [sw.spawner];
 		DecrementWaves ();
 	}
 
 	///Reduces the amount of monsters in (wave zero, subwave zero) by one. Removes empty waves and subwaves.
 	static void DecrementWaves () {
-		waves[0].subWaves[0] = new SubWave (waves[0].subWaves[0].type, waves[0].subWaves[0].amount - 1);//Remove one monster from the first subwave
+		SubWave subwaveZero = waves [0].subWaves[0];
+		waves[0].subWaves[0] = new SubWave (subwaveZero.type, subwaveZero.amount - 1, subwaveZero.spawner);//Remove one monster from the first subwave
 
 		if (waves[0].subWaves[0].amount <= 0)//Delete first subwave if it is empty
 			waves[0].subWaves.RemoveAt(0);

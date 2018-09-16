@@ -90,7 +90,13 @@ MonoBehaviour:
     speed: 30
     maxHp: 10
     reward: 25
-  spawner: {fileID: 0}
+  - prefab: {fileID: 1638486666199052, guid: 3be61406c6e1e214aba4f6cad1c3f785, type: 2}
+    speed: 5
+    maxHp: 50
+    reward: 100
+  spawners:
+  - {fileID: 0}
+  waveMessage: {fileID: 0}
   timeBeforeFirstWave: 2
   timeBetweenWaves: 10
   timeBetweenMonsters: 1
@@ -98,20 +104,30 @@ MonoBehaviour:
   - subWaves:
     - type: 0
       amount: 2
-  - subWaves:
-    - type: 0
-      amount: 3
-  - subWaves:
-    - type: 1
-      amount: 1
-  - subWaves:
-    - type: 1
-      amount: 2
+      spawner: 0
   - subWaves:
     - type: 0
       amount: 4
+      spawner: 0
+  - subWaves:
+    - type: 1
+      amount: 1
+      spawner: 0
+  - subWaves:
     - type: 1
       amount: 2
+      spawner: 0
+  - subWaves:
+    - type: 0
+      amount: 4
+      spawner: 0
+    - type: 1
+      amount: 2
+      spawner: 0
+  - subWaves:
+    - type: 2
+      amount: 1
+      spawner: 0
   pauseSpeed: 0
   playSpeed: 1
   fastSpeed: 3
@@ -127,7 +143,12 @@ MonoBehaviour:
   goldText: {fileID: 0}
   insufficientGoldText: {fileID: 0}
   livesText: {fileID: 0}
-  cloudHolder: {fileID: 0}
+  cloudHolders:
+  - {fileID: 0}
+  - {fileID: 0}
+  cloudSpeed:
+  - 1
+  - 2
   cloudPrefabs:
   - {fileID: 1853695215663660, guid: f9619964950ce524eae043b9ef37b679, type: 2}
   - {fileID: 1627556281247106, guid: 1d7fb24d114369a4c82bbb4038e70afc, type: 2}
@@ -136,7 +157,6 @@ MonoBehaviour:
   - {fileID: 1743151500548542, guid: 93d39bd091fa3124ca14b9357b9d95e7, type: 2}
   - {fileID: 1120902372308238, guid: aa4c77392242b2d41b0ad2f95969ad37, type: 2}
   cloudSpawnPos: {x: 50, y: 20, z: 30}
-  cloudSpeed: 10
   cloudZRandom: 20
   cloudMinX: -50
-  cloudSpawnDelay: 1
+  cloudSpawnDelay: 30
