@@ -255,6 +255,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1889112315816172, guid: 913619acb64561945a9255ab36bab3b4,
     type: 2}
   m_PrefabInternal: {fileID: 1409233353}
+--- !u!1 &971728151 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1382881547538662, guid: 913619acb64561945a9255ab36bab3b4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1409233353}
 --- !u!114 &1004948407 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114697315226874648, guid: 913619acb64561945a9255ab36bab3b4,
@@ -355,11 +360,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
-        type: 2}
-      propertyPath: waves.Array.data[0].subWaves.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4841024863103726, guid: 572e7ca0d19c77e4ca747e05dbeab48c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -492,31 +492,6 @@ Prefab:
       propertyPath: cloudHolders.Array.data[1]
       value: 
       objectReference: {fileID: 1970880251}
-    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
-        type: 2}
-      propertyPath: waves.Array.data[0].subWaves.Array.data[1].amount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
-        type: 2}
-      propertyPath: waves.Array.data[0].subWaves.Array.data[1].type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
-        type: 2}
-      propertyPath: waves.Array.data[0].subWaves.Array.data[0].amount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
-        type: 2}
-      propertyPath: waves.Array.data[0].subWaves.Array.data[0].type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114485674375671582, guid: 572e7ca0d19c77e4ca747e05dbeab48c,
-        type: 2}
-      propertyPath: waves.Array.data[1].subWaves.Array.data[0].amount
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 572e7ca0d19c77e4ca747e05dbeab48c, type: 2}
   m_IsPrefabParent: 0
@@ -622,33 +597,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1629419639151896, guid: 913619acb64561945a9255ab36bab3b4, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1837626032373956, guid: 913619acb64561945a9255ab36bab3b4, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1382881547538662, guid: 913619acb64561945a9255ab36bab3b4, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114984813371355752, guid: 913619acb64561945a9255ab36bab3b4,
-        type: 2}
-      propertyPath: m_FontData.m_FontSize
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 114780009675558728, guid: 913619acb64561945a9255ab36bab3b4,
-        type: 2}
-      propertyPath: m_FontData.m_FontSize
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 114094514218427304, guid: 913619acb64561945a9255ab36bab3b4,
-        type: 2}
-      propertyPath: m_FontData.m_FontSize
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 913619acb64561945a9255ab36bab3b4, type: 2}
   m_IsPrefabParent: 0
@@ -699,33 +647,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114876241352838026, guid: 16cbbbf2a766e304f82736a3077edd5e,
         type: 2}
-      propertyPath: CantBuildOnPathText
+      propertyPath: cantBuildOnPathText
       value: 
       objectReference: {fileID: 81801468}
     - target: {fileID: 114876241352838026, guid: 16cbbbf2a766e304f82736a3077edd5e,
         type: 2}
-      propertyPath: CantBuildOnTowerText
+      propertyPath: cantBuildOnTowerText
       value: 
-      objectReference: {fileID: 1690436644}
-    - target: {fileID: 114153157847037734, guid: 16cbbbf2a766e304f82736a3077edd5e,
+      objectReference: {fileID: 971728151}
+    - target: {fileID: 114876241352838026, guid: 16cbbbf2a766e304f82736a3077edd5e,
         type: 2}
-      propertyPath: m_Enabled
+      propertyPath: gridSize.y
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114876241352838026, guid: 16cbbbf2a766e304f82736a3077edd5e,
+        type: 2}
+      propertyPath: createGrid
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114153157847037734, guid: 16cbbbf2a766e304f82736a3077edd5e,
-        type: 2}
-      propertyPath: y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114153157847037734, guid: 16cbbbf2a766e304f82736a3077edd5e,
-        type: 2}
-      propertyPath: x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114153157847037734, guid: 16cbbbf2a766e304f82736a3077edd5e,
-        type: 2}
-      propertyPath: z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 16cbbbf2a766e304f82736a3077edd5e, type: 2}

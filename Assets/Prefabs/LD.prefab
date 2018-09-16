@@ -24269,7 +24269,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1512375374456000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aadec75256e832e4bb35a994019341a0, type: 3}
   m_Name: 
@@ -24321,6 +24321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e492056f4ea9641a3b3d3de8ba3625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileSize: {x: 4, y: 4}
+  gridSize: {x: 19, y: 19}
   path:
   - {x: 1, y: 1}
   - {x: 1, y: 6}
@@ -24355,16 +24357,10 @@ MonoBehaviour:
   - {x: 8, y: 6}
   - {x: 8, y: 7}
   - {x: 8, y: 8}
-  minX: -36
-  maxX: 36
-  minZ: -36
-  maxZ: 36
-  minEast: 0
-  maxEast: 18
-  minNorth: 0
-  maxNorth: 18
-  CantBuildOnPathText: {fileID: 0}
-  CantBuildOnTowerText: {fileID: 0}
-  TileFree: {fileID: 1709130788580122, guid: c295591e8aaf17c45a6519f292ef36f8, type: 2}
-  TilePath: {fileID: 1648791710568068, guid: c85eddf8c0c121248b0f8009316407be, type: 2}
   createGrid: 0
+  cantBuildOnPathText: {fileID: 0}
+  cantBuildOnTowerText: {fileID: 0}
+  greenHolder: {fileID: 4553959535355638}
+  pathHolder: {fileID: 4440795931965856}
+  tileFree: {fileID: 1709130788580122, guid: c295591e8aaf17c45a6519f292ef36f8, type: 2}
+  tilePath: {fileID: 1648791710568068, guid: c85eddf8c0c121248b0f8009316407be, type: 2}

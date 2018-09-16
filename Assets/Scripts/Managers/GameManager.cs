@@ -27,6 +27,7 @@ public class GameManager : MonoSingleton<GameManager> {
 	public Transform monsterHolder;
 	public List<MonsterManager.monsterType> monsters;
 
+	[Space(10)]
 	[Header("SPAWNER")]
 	public List<Transform> spawners;
 	public GameObject waveMessage;
@@ -34,6 +35,17 @@ public class GameManager : MonoSingleton<GameManager> {
 	public float timeBetweenWaves; //How long to wait between the last monster of a wave and the first monster of the next one
 	public float timeBetweenMonsters;
 	public List<WaveManager.Wave> waves = new List<WaveManager.Wave> ();
+
+	[Space(10)]
+	[Header("HP Bar")]
+	public Slider chunkPrefab;
+	public float chunkHP;
+	public float spaceWidth;
+	public Image backGroundPrefab;
+	public float BGXOffset;
+	public float BGYOffset;
+	public float BGLeftMargin;
+	public float BGTopMargin;
 
 	[Space(10)]
 	[Header("TIME")]

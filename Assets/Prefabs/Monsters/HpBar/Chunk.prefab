@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 114090947350423284}
   - component: {fileID: 114516670604645430}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Chunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

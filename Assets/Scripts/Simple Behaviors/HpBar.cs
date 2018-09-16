@@ -4,36 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HpBar : MonoBehaviour {
-	public float maxHP;
-
 	[Header("HP Bar")]
 	[SerializeField] float totalWidth;
 	[SerializeField] float totalHeight;
 	[SerializeField] float yPosition;
 
-	[Header("Chunks")]
-	[SerializeField] Slider chunkPrefab;
-	[SerializeField] float chunkHP;
-	[SerializeField] float spaceWidth;
+	//Reference to GameManager
+	static GameManager gm;
 
-	[Header("Background")]
-	[SerializeField] Image backGroundPrefab;
-	[SerializeField] float BGXOffset;
-	[SerializeField] float BGYOffset;
-	[SerializeField] float BGLeftMargin;
-	[SerializeField] float BGTopMargin;
+	//State
+	public float maxHP;
 
+	//Intermediate variables
 	float chunkWidth;
 	float chunkAmount;
 	int spaceAmount;
 
 	void Start () {
-		if (chunkHP == 0) chunkHP = 10; //Prevents infinite loops
+		gm = GameManager.Instance;
+
+		if (gm.chunkHP == 0) gm.chunkHP = 10; //Prevents infinite loops
 		maxHP = transform.parent.GetComponent<Monster>().type.maxHp;
 
-		chunkAmount = maxHP/chunkHP;
+		chunkAmount = maxHP/gm.chunkHP;
 		spaceAmount = Mathf.CeilToInt(chunkAmount)-1;
-		chunkWidth = (totalWidth - spaceAmount*spaceWidth)/chunkAmount;
+		chunkWidth = (totalWidth - spaceAmount*gm.spaceWidth)/chunkAmount;
 
 		setUpHPBar();
 		setHP (maxHP);
@@ -51,28 +46,28 @@ public class HpBar : MonoBehaviour {
 
 		//Set up background
 		setPosScale ( 
-			Instantiate(backGroundPrefab, transform).GetComponent<RectTransform>(), 
-			BGXOffset, yPosition + BGYOffset, 0, 
-			totalWidth+BGLeftMargin, totalHeight+BGTopMargin
+			Instantiate(gm.backGroundPrefab, transform).GetComponent<RectTransform>(), 
+			gm.BGXOffset, yPosition + gm.BGYOffset, 0, 
+			totalWidth+gm.BGLeftMargin, totalHeight+gm.BGTopMargin
 		);
 
 		//Set up every full bar
 		for (int i=0;i<Mathf.FloorToInt(chunkAmount);i++) {
-			Slider currentChunk = Instantiate(chunkPrefab, transform);
-			currentChunk.maxValue = chunkHP;
+			Slider currentChunk = Instantiate(gm.chunkPrefab, transform);
+			currentChunk.maxValue = gm.chunkHP;
 
 			setPosScale ( 
 				currentChunk.GetComponent<RectTransform>(), 
-				chunkWidth/2 + i*(chunkWidth+spaceWidth) - totalWidth/2, yPosition, 0, 
+				chunkWidth/2 + i*(chunkWidth+gm.spaceWidth) - totalWidth/2, yPosition, 0, 
 				chunkWidth, totalHeight
 			);
 		}
 
 		//Set up the final incomplete bar (if needed)
 		if (chunkAmount != Mathf.Floor(chunkAmount)) {
-			float xfinal = spaceAmount*(chunkWidth+spaceWidth) + (((float)maxHP%(float)chunkHP) * totalWidth) / (maxHP*2);
-			Slider finalChunk = Instantiate(chunkPrefab, transform);
-			float finalChunkHP = (maxHP % chunkHP);
+			float xfinal = spaceAmount*(chunkWidth+gm.spaceWidth) + (((float)maxHP%(float)gm.chunkHP) * totalWidth) / (maxHP*2);
+			Slider finalChunk = Instantiate(gm.chunkPrefab, transform);
+			float finalChunkHP = (maxHP % gm.chunkHP);
 			finalChunk.maxValue = finalChunkHP;
 			setPosScale ( 
 				finalChunk.GetComponent<RectTransform>(), 
@@ -86,7 +81,7 @@ public class HpBar : MonoBehaviour {
 		Slider[] children = GetComponentsInChildren<Slider>();
 		float hpLeft = hp;
 		for (int i=0;i<children.Length;i++) {
-			float currentChunkValue = Mathf.Min(chunkHP, hpLeft);
+			float currentChunkValue = Mathf.Min(gm.chunkHP, hpLeft);
 			children[i].value = currentChunkValue;
 			hpLeft -= currentChunkValue;
 		}

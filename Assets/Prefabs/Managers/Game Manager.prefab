@@ -103,7 +103,7 @@ MonoBehaviour:
   waves:
   - subWaves:
     - type: 0
-      amount: 2
+      amount: 3
       spawner: 0
   - subWaves:
     - type: 0
@@ -128,6 +128,16 @@ MonoBehaviour:
     - type: 2
       amount: 1
       spawner: 0
+  chunkPrefab: {fileID: 114090947350423284, guid: 51981e84596a293479322f45d0214004,
+    type: 2}
+  chunkHP: 5
+  spaceWidth: 1
+  backGroundPrefab: {fileID: 114059927358338578, guid: 2d9b88263bbef394d8238b2eb9ae0670,
+    type: 2}
+  BGXOffset: 0
+  BGYOffset: 0
+  BGLeftMargin: 0
+  BGTopMargin: -7
   pauseSpeed: 0
   playSpeed: 1
   fastSpeed: 3
