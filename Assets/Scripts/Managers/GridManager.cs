@@ -70,6 +70,12 @@ public static class GridManager {
 		grid [x, y] = type;
 	}
 
+	public static bool IsOnGrid(Vector3 target) {
+		Vector2 gridPos = ToGrid (target);
+		return (gridPos.x == Mathf.Clamp(gridPos.x, 0 , gm.gridSize.x-1) &&
+			gridPos.y == Mathf.Clamp(gridPos.y, 0, gm.gridSize.y -1));
+	}
+
 	///Snaps gameObject to the middle of the closest tile. Does not change its pos.y. Returns tile coords
 	public static Vector2Int SnapToTile (GameObject target) {
 		Vector3 pos = target.transform.position;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour  {
+public class Building : MonoBehaviour {
 	[SerializeField] List<GameObject> visuals;
 
 	//Visuals
@@ -44,7 +44,7 @@ public class Building : MonoBehaviour  {
 		opaque = TowerManager.opaque;
 
 		towerList.Add (transform);
-		transform.parent = TowerManager.th;
+		transform.parent = GameManager.Instance.towerHolder;
 
 		currentMaterial = opaque;
 	}
@@ -68,8 +68,10 @@ public class Building : MonoBehaviour  {
 	void ContinuePurchase () {
 		Vector2Int gridPos = SnapUnderCursor ();
 
+		//Check if the player just removed their finger over a free tile and if they have enough money
+		//Changes the tower material, displays an error message and/or places the tower, depending on the case
 		if (GridManager.TileIsFree(gridPos)) {
-			if (Input.GetMouseButtonUp (0)) {
+			if (Input.GetMouseButtonUp (0) && IsOnGrid()) {
 				if (GoldManager.CanAfford (tower.type.price))
 					EndPurchase ();
 				else
@@ -91,8 +93,19 @@ public class Building : MonoBehaviour  {
 		GoldManager.AddGold (-tower.type.price);
 		purchaseInProgress = false;
 		tower.purchaseInProgress = false;
+		TowerManager.towerBuildPreview = null;
 		TowerManager.SetCancelButton (false, tower.typeNumber);
 		tower.Reload ();
+	}
+
+	//Returns true if the gameobject is not outside of the grid
+	bool IsOnGrid () {
+		Vector3 pos = transform.position;
+		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		int layerMask = 1 << 8;
+		if (Physics.Raycast (ray, out hit, Mathf.Infinity, layerMask))
+			return GridManager.IsOnGrid(hit.point);
+		return false;
 	}
 
 	///Snaps the tower on the closest tile under player's mouse position
