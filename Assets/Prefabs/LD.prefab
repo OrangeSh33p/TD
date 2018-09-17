@@ -5919,7 +5919,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4846906782008970}
-  - component: {fileID: 114876241352838026}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -24310,57 +24309,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6fbf1d82ee3084bbeb565a7d984118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114876241352838026
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1923539480712190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e492056f4ea9641a3b3d3de8ba3625, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileSize: {x: 4, y: 4}
-  gridSize: {x: 19, y: 19}
-  path:
-  - {x: 1, y: 1}
-  - {x: 1, y: 6}
-  - {x: 1, y: 7}
-  - {x: 1, y: 8}
-  - {x: 2, y: 1}
-  - {x: 2, y: 3}
-  - {x: 2, y: 4}
-  - {x: 2, y: 5}
-  - {x: 2, y: 6}
-  - {x: 2, y: 8}
-  - {x: 3, y: 1}
-  - {x: 3, y: 3}
-  - {x: 3, y: 7}
-  - {x: 3, y: 8}
-  - {x: 4, y: 1}
-  - {x: 4, y: 2}
-  - {x: 4, y: 3}
-  - {x: 4, y: 7}
-  - {x: 5, y: 7}
-  - {x: 6, y: 2}
-  - {x: 6, y: 3}
-  - {x: 6, y: 4}
-  - {x: 6, y: 5}
-  - {x: 6, y: 6}
-  - {x: 6, y: 7}
-  - {x: 7, y: 2}
-  - {x: 8, y: 2}
-  - {x: 8, y: 3}
-  - {x: 8, y: 4}
-  - {x: 8, y: 5}
-  - {x: 8, y: 6}
-  - {x: 8, y: 7}
-  - {x: 8, y: 8}
-  createGrid: 0
-  cantBuildOnPathText: {fileID: 0}
-  cantBuildOnTowerText: {fileID: 0}
-  greenHolder: {fileID: 4553959535355638}
-  pathHolder: {fileID: 4440795931965856}
-  tileFree: {fileID: 1709130788580122, guid: c295591e8aaf17c45a6519f292ef36f8, type: 2}
-  tilePath: {fileID: 1648791710568068, guid: c85eddf8c0c121248b0f8009316407be, type: 2}

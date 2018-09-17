@@ -18,9 +18,6 @@ public class Building : MonoBehaviour  {
 	Ray ray;
 	RaycastHit hit;
 
-	//References
-	GridManager gridManager = GridManager.Instance;
-
 	//tower : the tower script of the gameObject
 	Tower _tower;
 	Tower tower  {
@@ -45,8 +42,6 @@ public class Building : MonoBehaviour  {
 		transparent = TowerManager.transparent;
 		transparentRed = TowerManager.transparentRed;
 		opaque = TowerManager.opaque;
-
-		gridManager = GridManager.Instance;
 
 		towerList.Add (transform);
 		transform.parent = TowerManager.th;
@@ -73,12 +68,12 @@ public class Building : MonoBehaviour  {
 	void ContinuePurchase () {
 		Vector2Int gridPos = SnapUnderCursor ();
 
-		if (gridManager.TileIsFree(gridPos)) {
+		if (GridManager.TileIsFree(gridPos)) {
 			if (Input.GetMouseButtonUp (0)) {
 				if (GoldManager.CanAfford (tower.type.price))
 					EndPurchase ();
 				else
-					GoldManager.DisplayInsufficientGoldText ();
+					UIManager.DisplayText(GameManager.Instance.insufficientGoldText);
 			}
 			else
 				SetMaterial ((GoldManager.CanAfford (tower.type.price)) ? transparent : transparentRed);
@@ -86,13 +81,13 @@ public class Building : MonoBehaviour  {
 		else {
 			SetMaterial(transparentRed);
 			if (Input.GetMouseButtonUp (0))
-				gridManager.TryBuildOnTile (gridPos);
+				GridManager.TryBuildOnTile (gridPos);
 		}
 	}
 
 	void EndPurchase () {
 		SetMaterial(opaque);
-		gridManager.SetAdjacentTiles (SnapUnderCursor(), GridManager.Tile.tower);
+		GridManager.SetAdjacentTiles (SnapUnderCursor(), GridManager.Tile.tower);
 		GoldManager.AddGold (-tower.type.price);
 		purchaseInProgress = false;
 		tower.purchaseInProgress = false;
@@ -108,7 +103,7 @@ public class Building : MonoBehaviour  {
 		if (Physics.Raycast (ray, out hit, Mathf.Infinity, layerMask))
 			transform.position = hit.point;
 
-		return gridManager.SnapToTile (gameObject);
+		return GridManager.SnapToTile (gameObject);
 		
 	}
 

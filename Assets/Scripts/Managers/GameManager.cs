@@ -7,12 +7,20 @@ using UnityEngine.UI;
 public class GameManager : MonoSingleton<GameManager> {
 
 	[Space(10)]
-	[Header("GOLD")]
+	[Header("RESOURCES")]
 	public int startGold;
+	public int maxLives;
 
 	[Space(10)]
-	[Header("LIVES")]
-	public int maxLives;
+	[Header("GRID")]
+	public Vector2 tileSize;
+	public Vector2Int gridSize;
+	public List<Vector2Int> path;
+	public bool createGrid;
+	public Transform greenHolder;
+	public Transform pathHolder;
+	public GameObject tileFree;
+	public GameObject tilePath;
 
 	[Space(10)]
 	[Header("TOWERS")]
@@ -32,7 +40,7 @@ public class GameManager : MonoSingleton<GameManager> {
 	public List<Transform> spawners;
 	public GameObject waveMessage;
 	public float timeBeforeFirstWave;
-	public float timeBetweenWaves; //How long to wait between the last monster of a wave and the first monster of the next one
+	public float timeBetweenWaves; //from the LAST monster of a wave to the FIRST monster of the next one
 	public float timeBetweenMonsters;
 	public List<WaveManager.Wave> waves = new List<WaveManager.Wave> ();
 
@@ -53,23 +61,22 @@ public class GameManager : MonoSingleton<GameManager> {
 	public float playSpeed;
 	public float fastSpeed;
 	public float superFastSpeed;
+
+	[Space(10)]
+	[Header("UI")]
+	public float textDisplayDuration;
+	public Text goldText;
+	public Text livesText;
+	public Text insufficientGoldText;
+	public Text cantBuildOnPathText;
+	public Text cantBuildOnTowerText;
 	public Button PauseButton;
 	public Button PlayButton;
 	public Button FastButton;
 	public Button SuperFastButton;
 	public Image SuperFastImage;
-
-	[Space(10)]
-	[Header("END GAME")]
 	public GameObject gameoverOverlay;
 	public GameObject victoryOverlay;
-
-	[Space(10)]
-	[Header("TEXT DISPLAYS")]
-	public float textDisplayDuration;
-	public Text goldText;
-	public GameObject insufficientGoldText;
-	public Text livesText;
 
 	[Space(10)]
 	[Header ("CLOUDS")]
@@ -92,6 +99,7 @@ public class GameManager : MonoSingleton<GameManager> {
 	//Calls _Start method in all managers
 	void StartManagers () {
 		GoldManager._Start();
+		GridManager._Start();
 		LivesManager._Start();
 		TimeManager._Start();
 		TowerManager._Start();
@@ -100,11 +108,15 @@ public class GameManager : MonoSingleton<GameManager> {
 
 	//Calls _Update method in all managers
 	void UpdateManagers () {
-		GoldManager._Update();
 		CloudManager._Update();
-		TimeManager._Update();
 		FlowManager._Update();
+		TimeManager._Update();
 		WaveManager._Update();
+	}
+
+	//StartCoroutine method that can be used by classes that do not inherit monoBehavior
+	public void _StartCoroutine (IEnumerator target) {
+		StartCoroutine(target);
 	}
 
 	//Instantiate method that can be used by classes that do not inherit monoBehavior

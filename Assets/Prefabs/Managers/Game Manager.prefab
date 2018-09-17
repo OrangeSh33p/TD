@@ -53,6 +53,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGold: 200
   maxLives: 10
+  tileSize: {x: 4, y: 4}
+  gridSize: {x: 19, y: 19}
+  path:
+  - {x: 1, y: 1}
+  - {x: 1, y: 6}
+  - {x: 1, y: 7}
+  - {x: 1, y: 8}
+  - {x: 2, y: 1}
+  - {x: 2, y: 3}
+  - {x: 2, y: 4}
+  - {x: 2, y: 5}
+  - {x: 2, y: 6}
+  - {x: 2, y: 8}
+  - {x: 3, y: 1}
+  - {x: 3, y: 3}
+  - {x: 3, y: 7}
+  - {x: 3, y: 8}
+  - {x: 4, y: 1}
+  - {x: 4, y: 2}
+  - {x: 4, y: 3}
+  - {x: 4, y: 7}
+  - {x: 5, y: 7}
+  - {x: 6, y: 2}
+  - {x: 6, y: 3}
+  - {x: 6, y: 4}
+  - {x: 6, y: 5}
+  - {x: 6, y: 6}
+  - {x: 6, y: 7}
+  - {x: 7, y: 2}
+  - {x: 8, y: 2}
+  - {x: 8, y: 3}
+  - {x: 8, y: 4}
+  - {x: 8, y: 5}
+  - {x: 8, y: 6}
+  - {x: 8, y: 7}
+  - {x: 8, y: 8}
+  createGrid: 0
+  greenHolder: {fileID: 0}
+  pathHolder: {fileID: 0}
+  tileFree: {fileID: 1709130788580122, guid: c295591e8aaf17c45a6519f292ef36f8, type: 2}
+  tilePath: {fileID: 1648791710568068, guid: c85eddf8c0c121248b0f8009316407be, type: 2}
   towerHolder: {fileID: 0}
   towers:
   - prefab: {fileID: 1227333984325806, guid: 8f9b39a74c491d34889bc3652ba4e175, type: 2}
@@ -92,7 +133,7 @@ MonoBehaviour:
     reward: 25
   - prefab: {fileID: 1638486666199052, guid: 3be61406c6e1e214aba4f6cad1c3f785, type: 2}
     speed: 5
-    maxHp: 50
+    maxHp: 100
     reward: 100
   spawners:
   - {fileID: 0}
@@ -149,10 +190,12 @@ MonoBehaviour:
   SuperFastImage: {fileID: 0}
   gameoverOverlay: {fileID: 0}
   victoryOverlay: {fileID: 0}
-  textDisplayDuration: 1
   goldText: {fileID: 0}
-  insufficientGoldText: {fileID: 0}
   livesText: {fileID: 0}
+  textDisplayDuration: 1
+  insufficientGoldText: {fileID: 0}
+  cantBuildOnPathText: {fileID: 0}
+  cantBuildOnTowerText: {fileID: 0}
   cloudHolders:
   - {fileID: 0}
   - {fileID: 0}

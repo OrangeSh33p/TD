@@ -16,13 +16,6 @@ public static class GoldManager {
 		PrintGold ();
 	}
 
-	public static void _Update () {
-		if (textTimeLeft > 0)
-			textTimeLeft -= Time.deltaTime;
-		else if (gm.insufficientGoldText.activeSelf)
-			gm.insufficientGoldText.SetActive (false);
-	}
-
 	///return true if player has more gold than "amount"
 	public static bool CanAfford (int amount) {
 		return (gold - amount >= 0);
@@ -34,15 +27,10 @@ public static class GoldManager {
 			gold += amount;
 			PrintGold ();
 		} else
-			DisplayInsufficientGoldText ();
+			UIManager.DisplayText(gm.insufficientGoldText);
 	}
 
 	static void PrintGold () {
 		gm.goldText.text = "x " + gold;
-	}
-
-	public static void DisplayInsufficientGoldText () {
-		gm.insufficientGoldText.SetActive (true);
-		textTimeLeft = gm.textDisplayDuration;
 	}
 }
