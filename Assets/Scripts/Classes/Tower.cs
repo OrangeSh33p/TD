@@ -46,7 +46,7 @@ public class Tower : MonoBehaviour {
 
 		monstersInRange.Clear ();
 		foreach (Transform m in Monster.monsterList)
-			if (Vector3.Distance (transform.position, m.position) < type.range && m.GetComponent<Monster>().predictiveHP > 0)
+			if (Vector3.Distance (transform.position, m.position) < type.range*GameManager.Instance.tileSize && m.GetComponent<Monster>().predictiveHP > 0)
 				monstersInRange.Add (m);
 
 		if (monstersInRange.Count != 0)

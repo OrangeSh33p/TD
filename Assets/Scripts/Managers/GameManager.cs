@@ -13,7 +13,7 @@ public class GameManager : MonoSingleton<GameManager> {
 
 	[Space(10)]
 	[Header("GRID")]
-	public Vector2 tileSize;
+	public float tileSize;
 	public Vector2Int gridSize;
 	public List<Vector2Int> path;
 	public bool createGrid;

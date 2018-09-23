@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGold: 200
   maxLives: 10
-  tileSize: {x: 4, y: 4}
+  tileSize: 4
   gridSize: {x: 19, y: 19}
   path:
   - {x: 1, y: 1}
@@ -108,6 +108,17 @@ MonoBehaviour:
     buildButton: {fileID: 0}
     cancelButton: {fileID: 0}
   - prefab: {fileID: 1053635697539900, guid: 47f32fa0dd28e4d4cb9943459bf562bc, type: 2}
+    price: 100
+    range: 20
+    reloadingTime: 1
+    damage: 1
+    bulletSpeed: 100
+    bulletPrefab: {fileID: 1876931515450176, guid: 7766d1a32900e9840a5ba00f40e2234a,
+      type: 2}
+    bulletSpawnPoint: {x: 0, y: 10, z: 0}
+    buildButton: {fileID: 0}
+    cancelButton: {fileID: 0}
+  - prefab: {fileID: 1109318367968678, guid: 268a6b712c8674b4591ad1fb2ab68cf4, type: 2}
     price: 100
     range: 20
     reloadingTime: 1
@@ -183,6 +194,12 @@ MonoBehaviour:
   playSpeed: 1
   fastSpeed: 3
   superFastSpeed: 10
+  textDisplayDuration: 1
+  goldText: {fileID: 0}
+  livesText: {fileID: 0}
+  insufficientGoldText: {fileID: 0}
+  cantBuildOnPathText: {fileID: 0}
+  cantBuildOnTowerText: {fileID: 0}
   PauseButton: {fileID: 0}
   PlayButton: {fileID: 0}
   FastButton: {fileID: 0}
@@ -190,12 +207,6 @@ MonoBehaviour:
   SuperFastImage: {fileID: 0}
   gameoverOverlay: {fileID: 0}
   victoryOverlay: {fileID: 0}
-  goldText: {fileID: 0}
-  livesText: {fileID: 0}
-  textDisplayDuration: 1
-  insufficientGoldText: {fileID: 0}
-  cantBuildOnPathText: {fileID: 0}
-  cantBuildOnTowerText: {fileID: 0}
   cloudHolders:
   - {fileID: 0}
   - {fileID: 0}

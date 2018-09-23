@@ -28,12 +28,12 @@ public static class GridManager {
 
 	#region conversion functions
 	///translates an absolute world coordinate into a grid coordinate (NON INTEGER)
-	static float ToEast (float x) {return (x/gm.tileSize.x + (gm.gridSize.x-1)/2);}
-	static float ToNorth (float z)	{return(z/gm.tileSize.y + (gm.gridSize.y-1)/2);}
+	static float ToEast (float x) {return (x/gm.tileSize + (gm.gridSize.x-1)/2);}
+	static float ToNorth (float z)	{return(z/gm.tileSize + (gm.gridSize.y-1)/2);}
 
 	///translates a grid coordinate into an absolute world coordinate
-	static float ToX (float east) {return(gm.tileSize.x*(east - (gm.gridSize.x-1)/2));}
-	static float ToZ (float north) {return(gm.tileSize.y*(north - (gm.gridSize.y-1)/2));}
+	static float ToX (float east) {return(gm.tileSize*(east - (gm.gridSize.x-1)/2));}
+	static float ToZ (float north) {return(gm.tileSize*(north - (gm.gridSize.y-1)/2));}
 
 	///translates absolute coordinates to grid coordinates and vice versa
 	static Vector2 ToGrid(Vector3 position) {return new Vector2 (ToEast(position.x), ToNorth(position.z));}
