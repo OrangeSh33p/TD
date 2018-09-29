@@ -5,67 +5,58 @@ using UnityEngine.UI;
 
 public static class TimeManager {
 	//Reference to GameManager
-	static GameManager gm = GameManager.Instance;
-	
-	//References to variables
-	static float pauseSpeed = gm.pauseSpeed;
-	static float playSpeed = gm.playSpeed;
-	static float fastSpeed = gm.fastSpeed;
-	static float superFastSpeed = gm.superFastSpeed;
-	static Button PauseButton = gm.PauseButton;
-	static Button PlayButton = gm.PlayButton;
-	static Button FastButton = gm.FastButton;
-	static Button SuperFastButton = gm.SuperFastButton;
-	static Image SuperFastImage = gm.SuperFastImage;
+	static GameManager gm;
 
 	//State
-	public static float timeScale;
+	static float timeScale;
+	public static float scaledDeltaTime {
+		get {
+			return Time.deltaTime * timeScale;
+		}
+	}
 
-	public static void _Start () {
-		timeScale = 1;
-		PauseButton.onClick.AddListener (Pause);
-		PlayButton.onClick.AddListener (Play);
-		FastButton.onClick.AddListener (Fast);
-		SuperFastButton.onClick.AddListener (SuperFast);
-
+	public static void _Init() {
+		gm = GameManager.Instance;
 		Play ();
 	}
 
-	public static void _Update () {
-		if (Input.GetKeyDown (KeyCode.Space))
-			timeScale = 1 - timeScale;
+	public static void _Start () {
+		gm.pauseButton.onClick.AddListener (Pause);
+		gm.playButton.onClick.AddListener (Play);
+		gm.fastButton.onClick.AddListener (Fast);
+		gm.superFastButton.onClick.AddListener (SuperFast);
 	}
 
 	static void Pause () {
-		timeScale = pauseSpeed;
+		timeScale = gm.pauseSpeed;
 		SetAllToWhite ();
-		PauseButton.GetComponent<Image>().color = Color.cyan;
+		gm.pauseButton.GetComponent<Image>().color = Color.cyan;
 	}
 
 	static void Play () {
-		timeScale = playSpeed;
+		timeScale = gm.playSpeed;
 		SetAllToWhite ();
-		PlayButton.GetComponent<Image>().color = Color.cyan;
+		gm.playButton.GetComponent<Image>().color = Color.cyan;
 	}
 
 	static void Fast () {
-		timeScale = fastSpeed;
+		timeScale = gm.fastSpeed;
 		SetAllToWhite ();
-		FastButton.GetComponent<Image>().color = Color.cyan;
+		gm.fastButton.GetComponent<Image>().color = Color.cyan;
 	}
 
 	static void SuperFast () {
-		timeScale = superFastSpeed;
+		timeScale = gm.superFastSpeed;
 		SetAllToWhite ();
-		SuperFastButton.GetComponent<Image>().color = Color.cyan;
-		SuperFastImage.color = Color.cyan;
+		gm.superFastButton.GetComponent<Image>().color = Color.cyan;
+		gm.superFastImage.color = Color.cyan;
 	}
 
 	static void SetAllToWhite () {
-		PauseButton.GetComponent<Image>().color = Color.white;
-		PlayButton.GetComponent<Image>().color = Color.white;
-		FastButton.GetComponent<Image>().color = Color.white;
-		SuperFastButton.GetComponent<Image>().color = Color.white;
-		SuperFastImage.color = Color.white;
+		gm.pauseButton.GetComponent<Image>().color = Color.white;
+		gm.playButton.GetComponent<Image>().color = Color.white;
+		gm.fastButton.GetComponent<Image>().color = Color.white;
+		gm.superFastButton.GetComponent<Image>().color = Color.white;
+		gm.superFastImage.color = Color.white;
 	}
 }

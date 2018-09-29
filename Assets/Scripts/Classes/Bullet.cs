@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour {
 	void Move () {
 		transform.LookAt (targetTransform);
 		transform.position += 
-			transform.forward * Mathf.Min (type.bulletSpeed * Time.deltaTime * TimeManager.timeScale, Vector3.Distance (transform.position, targetTransform.position));
+			transform.forward * Mathf.Min (type.bulletSpeed * TimeManager.scaledDeltaTime, Vector3.Distance (transform.position, targetTransform.position));
 	}
 
 	///Triggers damage sequence if close enough to the target

@@ -70,11 +70,11 @@ public class GameManager : MonoSingleton<GameManager> {
 	public Text insufficientGoldText;
 	public Text cantBuildOnPathText;
 	public Text cantBuildOnTowerText;
-	public Button PauseButton;
-	public Button PlayButton;
-	public Button FastButton;
-	public Button SuperFastButton;
-	public Image SuperFastImage;
+	public Button pauseButton;
+	public Button playButton;
+	public Button fastButton;
+	public Button superFastButton;
+	public Image superFastImage;
 	public GameObject gameoverOverlay;
 	public GameObject victoryOverlay;
 
@@ -89,14 +89,29 @@ public class GameManager : MonoSingleton<GameManager> {
 	public int cloudSpawnDelay;
 
 	void Start () {
+		InitManagers();
 		StartManagers ();
 	}
 
 	void Update ()	{
 		UpdateManagers ();
 	}
+	
+	///<summary>Calls _Init method in all managers (used to assign all scene objects on restart)</summary>
+	void InitManagers () {
+		TimeManager._Init();
+		FlowManager._Init();
+		CloudManager._Init();
+		GoldManager._Init();
+		GridManager._Init();
+		LivesManager._Init();
+		MonsterManager._Init();
+		TowerManager._Init();
+		UIManager._Init();
+		WaveManager._Init();
+	}
 
-	//Calls _Start method in all managers
+	///<summary>Calls _Start method in all managers</summary>
 	void StartManagers () {
 		GoldManager._Start();
 		GridManager._Start();
@@ -106,25 +121,24 @@ public class GameManager : MonoSingleton<GameManager> {
 		WaveManager._Start();
 	}
 
-	//Calls _Update method in all managers
+	///<summary>Calls _Update method in all managers</summary>
 	void UpdateManagers () {
 		CloudManager._Update();
 		FlowManager._Update();
-		TimeManager._Update();
 		WaveManager._Update();
 	}
 
-	//StartCoroutine method that can be used by classes that do not inherit monoBehavior
+	///<summary>delegate StartCoroutine method that can be used by classes that do not inherit monoBehavior</summary>
 	public void _StartCoroutine (IEnumerator target) {
 		StartCoroutine(target);
 	}
 
-	//Instantiate method that can be used by classes that do not inherit monoBehavior
+	///<summary>delegate Instantiate method that can be used by classes that do not inherit monoBehavior</summary>
 	public GameObject _Instantiate (GameObject original, Vector3 position, Quaternion rotation, Transform parent) {
 		return Instantiate(original, position, rotation, parent);
 	}
 
-	//Destroy method that can be used by classes that do not inherit monoBehavior
+	///<summary>delagate Destroy method that can be used by classes that do not inherit monoBehavior</summary>
 	public void _Destroy (GameObject target) {
 		Destroy (target);
 	}

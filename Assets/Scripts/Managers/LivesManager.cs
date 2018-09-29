@@ -10,8 +10,12 @@ public static class LivesManager {
 	//State
 	static int lives;
 
-	public static void _Start () {
+	public static void _Init () {
+		gm = GameManager.Instance;
 		lives = gm.maxLives;
+	}
+
+	public static void _Start () {
 		PrintLives ();
 	}
 

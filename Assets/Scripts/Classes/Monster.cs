@@ -55,7 +55,7 @@ public class Monster : MonoBehaviour {
 
 	void Move () {
 		//The full distance you have to move this frame
-		float moveDistance = type.speed * GameManager.Instance.tileSize * Time.deltaTime * TimeManager.timeScale; 
+		float moveDistance = type.speed * GameManager.Instance.tileSize * TimeManager.scaledDeltaTime;
 		distanceWalked += moveDistance;
 
 		while (moveDistance > 0) {

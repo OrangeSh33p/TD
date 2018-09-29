@@ -10,35 +10,47 @@ public static class WaveManager {
 	//Timers
 	static float timeToNextMonster;
 	static float timeToNextWave;
-	static bool waitingForNextWave = true;
-	static int waveNb = 1;
+	static bool waitingForNextWave;
+	static int waveNb;
 
-	//Checks wether every wave has been spawned
+	///<summary>Checks wether every wave has been spawned</summary>
 	public static bool wavesAreOver {
 		get  {
 			return (waves.Count == 0);
 		}
 	}
 
+	///<summary>The list of everything that needs to be spawned this level</summary>
 	static List<Wave> waves;
-	//Wave : a group of monsters spawning at the same time. Spawns subwaves one by one in the given order
+	///<summary>A group of monsters spawning at the same time. Contains Subwaves that are instanciated one by one in order</summary>
 	[System.Serializable] public struct Wave {
 		public List<SubWave> subWaves;
+
 		public Wave (List<SubWave> subWaves) {
 			this.subWaves = subWaves;
 		}
 	}
 
-	//Subwave : a subset of a wave, containing only monsters of the same type, spawning from the same place
+	///<summary>A subset of a wave, containing only monsters of the same type, spawning from the same place</summary>
 	[System.Serializable] public struct SubWave {
 		public int type;
 		public int amount;
 		public int spawner;
+
 		public SubWave (int type, int amount, int spawner) {
 			this.type = type;
 			this.amount = amount;
 			this.spawner = spawner;
 		}
+
+		public void SetAmount (int newAmount) {
+			this.amount = newAmount;
+		}
+	}
+
+	public static void _Init () {
+		waitingForNextWave = true;
+		waveNb = 1;
 	}
 
 	public static void _Start () {
@@ -52,9 +64,9 @@ public static class WaveManager {
 			SpawnMonster ();
 	}
 
-	///True if a wave is currently being spawned
+	///<summary>True if a wave is currently being spawned</summary>
 	static bool NextWaveReady () {
-		timeToNextWave -= Time.deltaTime * TimeManager.timeScale;
+		timeToNextWave -= TimeManager.scaledDeltaTime;
 		if (timeToNextWave <= 1 && waitingForNextWave)
 			DisplayWaveMessage (true);
 		if (timeToNextWave <= 0 && waitingForNextWave)
@@ -62,20 +74,20 @@ public static class WaveManager {
 		return (timeToNextWave <= 0);
 	}
 
-	///True if a monster is ready to be spawned
+	///<summary>True if a monster is ready to be spawned</summary>
 	static bool NextMonsterReady () {
-		timeToNextMonster -= Time.deltaTime * TimeManager.timeScale;
+		timeToNextMonster -= TimeManager.scaledDeltaTime;
 		return (timeToNextMonster <= 0);
 	}
 
 	static void SpawnMonster () {
-		SubWave sw = waves [0].subWaves[0];
-		GameObject mon = gm._Instantiate (gm.monsters[sw.type].prefab, gm.spawners[sw.spawner].position, Quaternion.identity, gm.monsterHolder);
-		mon.GetComponent<Monster> ().origin = gm.spawners [sw.spawner];
+		SubWave sw = waves[0].subWaves[0];
+		GameObject monster = gm._Instantiate (gm.monsters[sw.type].prefab, gm.spawners[sw.spawner].position, Quaternion.identity, gm.monsterHolder);
+		monster.GetComponent<Monster> ().origin = gm.spawners [sw.spawner];
 		DecrementWaves ();
 	}
 
-	///Reduces the amount of monsters in (wave zero, subwave zero) by one. Removes empty waves and subwaves.
+	///<summary>Reduces the amount of monsters in (wave zero, subwave zero) by one. Removes empty waves and subwaves</summary>
 	static void DecrementWaves () {
 		SubWave subwaveZero = waves [0].subWaves[0];
 		waves[0].subWaves[0] = new SubWave (subwaveZero.type, subwaveZero.amount - 1, subwaveZero.spawner);//Remove one monster from the first subwave

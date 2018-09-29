@@ -89,7 +89,7 @@ public class Building : MonoBehaviour {
 
 	void EndPurchase () {
 		SetMaterial(opaque);
-		GridManager.SetAdjacentTiles (SnapUnderCursor(), GridManager.Tile.tower);
+		GridManager.SetAdjacentTiles (SnapUnderCursor(), GridManager.Tile.TOWER);
 		GoldManager.AddGold (-tower.type.price);
 		purchaseInProgress = false;
 		tower.purchaseInProgress = false;

@@ -5,14 +5,19 @@ using UnityEngine.UI;
 
 public static class GoldManager {
 	//Reference to GameManager
-	static GameManager gm = GameManager.Instance;
+	static GameManager gm;
 
 	//State
 	static int gold;
 	static float textTimeLeft;
 
-	public static void _Start () {
+	public static void _Init () {
+		gm = GameManager.Instance;
 		gold = gm.startGold;
+
+	}
+
+	public static void _Start () {
 		PrintGold ();
 	}
 

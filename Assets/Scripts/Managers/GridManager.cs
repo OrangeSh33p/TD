@@ -8,14 +8,17 @@ public static class GridManager {
 	//GRID coordinates are specific to this script. They consist of 2 int : East and North. East correspond to x and North to z
 
 	//Reference to GameManager
-	static GameManager gm = GameManager.Instance;
+	static GameManager gm;
 
 	//Tile : Describes the state of a tile. Can be free, or taken by a tower or a path tile
-	public enum Tile{free, tower, path};
+	public enum Tile{FREE, TOWER, PATH};
 
 	//Grid : a double array of Tiles, describing the state of the entire board
 	static Tile[,] grid;
 
+	public static void _Init() {
+		gm = GameManager.Instance;
+	}
 
 	public static void _Start () {
 		//Create grid if needed
@@ -94,15 +97,15 @@ public static class GridManager {
 	}
 
 	public static bool TileIsFree (Vector2Int tile) {
-		return (grid [tile.x, tile.y] == Tile.free);
+		return (grid [tile.x, tile.y] == Tile.FREE);
 	}
 
 	/// displays a UI message if the tile is taken
 	public static void TryBuildOnTile (Vector2Int tile) {
 		Tile t = grid [tile.x, tile.y];
-		if (t == Tile.path)
+		if (t == Tile.PATH)
 			UIManager.DisplayText(gm.cantBuildOnPathText);
-		else if (t == Tile.tower)
+		else if (t == Tile.TOWER)
 			UIManager.DisplayText(gm.cantBuildOnTowerText);
 	}
 	#endregion
@@ -133,11 +136,11 @@ public static class GridManager {
 		//Grass tiles
 		foreach (Transform t in gm.greenHolder) {
 			Vector2 tGridPos = ToGrid(t.position);
-			grid [(int)tGridPos.x, (int)tGridPos.y] = Tile.free;
+			grid [(int)tGridPos.x, (int)tGridPos.y] = Tile.FREE;
 		}
 
 		//Path
 		foreach(Vector2Int p in gm.path)
-			SetAdjacentTiles (new Vector2Int(2*p.x, 2*p.y), Tile.path);
+			SetAdjacentTiles (new Vector2Int(2*p.x, 2*p.y), Tile.PATH);
 	}
 }

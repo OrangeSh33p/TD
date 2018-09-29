@@ -5,21 +5,29 @@ using UnityEngine.SceneManagement;
 
 public static class FlowManager {
 	//Reference to GameManager
-	static GameManager gm = GameManager.Instance;
+	static GameManager gm;
 
 	//Game State
 	public enum gameState {PLAYING, VICTORY, DEFEAT};
-	public static gameState state = gameState.PLAYING;
+	public static gameState state;
 
 	//State
-	static float timeToNextScreen = 0;
-	static float timeToSceneChange = 0;
-	static bool waiting = false;
+	static float timeToNextScreen ;
+	static float timeToSceneChange ;
+	static bool waiting;
+
+	public static void _Init() {
+		gm = GameManager.Instance;
+		state = gameState.PLAYING;
+		timeToNextScreen = 0;
+		timeToSceneChange = 0;
+		waiting = false;
+	}
 
 	public static void _Update () {
 		//Count time left before showing endgame screen
 		if (timeToNextScreen > 0)
-			timeToNextScreen -= Time.deltaTime * TimeManager.timeScale;
+			timeToNextScreen -= TimeManager.scaledDeltaTime;
 		if (waiting && timeToNextScreen <= 0) {
 			timeToSceneChange = 3;
 			if (state == gameState.VICTORY)
@@ -31,7 +39,7 @@ public static class FlowManager {
 
 		//Count time left before reloading scene
 		if (timeToSceneChange > 0)
-			timeToSceneChange -= Time.deltaTime * TimeManager.timeScale;
+			timeToSceneChange -= TimeManager.scaledDeltaTime;
 		if (timeToSceneChange < 0)
 			RestartScene ();
 	}

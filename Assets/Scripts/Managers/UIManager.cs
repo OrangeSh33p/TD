@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public static class UIManager {
 	//Reference to GameManager
-	static GameManager gm = GameManager.Instance;
+	static GameManager gm;
+
+	public static void _Init () {
+		gm = GameManager.Instance;
+	}
 	
 	public static void DisplayText (Text target) {
 		gm._StartCoroutine(_DisplayText(target));

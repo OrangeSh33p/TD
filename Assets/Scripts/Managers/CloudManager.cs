@@ -4,18 +4,15 @@ using UnityEngine;
 
 public static class CloudManager {
 	//Reference to GameManager
-	static GameManager gm = GameManager.Instance;
-	static List<Transform> ch = gm.cloudHolders;
-
-	/*[System.Serializable] public struct cloudGenerator {
-		public Vector3 cloudSpawnPos;
-		public int cloudSpeed;
-		public int cloudZRandom;
-		public int cloudMinX;
-		public int cloudSpawnDelay;
-	}*/
+	static GameManager gm;
 
 	static float timeBeforeNextCloud;
+	static List<Transform> ch;
+
+	public static void _Init() {
+		gm = GameManager.Instance;
+		ch = gm.cloudHolders;
+	}
 
 	public static void _Update () {
 		MoveCloud ();
@@ -23,7 +20,7 @@ public static class CloudManager {
 			SpawnCloud ();
 			timeBeforeNextCloud = gm.cloudSpawnDelay;
 		} else
-			timeBeforeNextCloud -= Time.deltaTime * TimeManager.timeScale;
+			timeBeforeNextCloud -= TimeManager.scaledDeltaTime;
 	}
 
 	static void SpawnCloud () {
@@ -38,9 +35,9 @@ public static class CloudManager {
 
 	static void MoveCloud () {
 		for(int i=0;i<ch.Count;i++) {
-			foreach (Transform cloud in ch[i].GetComponentsInChildren<Transform>()) {
-				if (cloud != ch[i]) 	{
-					cloud.position += Time.deltaTime * gm.cloudSpeed[i] * TimeManager.timeScale * new Vector3 (-1, 0, 0);
+			foreach (Transform cloud in ch[i]) {
+				if (cloud != ch[i]) {
+					cloud.position += gm.cloudSpeed[i]  * new Vector3 (-1, 0, 0) * TimeManager.scaledDeltaTime;
 					if (cloud.position.x < gm.cloudMinX)
 						gm._Destroy (cloud.gameObject);
 				}

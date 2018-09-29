@@ -34,7 +34,7 @@ public class Tower : MonoBehaviour {
 		if (remainingReloadTime <= 0)
 			return true;
 		else {
-			remainingReloadTime -= Time.deltaTime * TimeManager.timeScale;
+			remainingReloadTime -= TimeManager.scaledDeltaTime;
 			return false;
 		}
 	}
